@@ -24,27 +24,34 @@ class _AppState extends State<App> {
       designSize: AppConstants.designSize,
       minTextAdapt: true,
       splitScreenMode: true,
+      builder: (context, child) => GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: child,
+      ),
       child: _buildBody(),
     );
   }
 
   Widget _buildBody() {
-    return BlocBuilder<AppCubit, AppState>(
-      bloc: getIt<AppCubit>(),
-      builder: (context, state) {
-        return MaterialApp.router(
-          title: AppConfig.getUrl,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: state.currentLanguage.locate,
-          supportedLocales: AppLocalizations.supportedLocales,
-          routerConfig: getIt<AppRouter>().config(),
-        );
-      },
+    return BlocProvider<AppCubit>(
+      create: (context) => getIt<AppCubit>(),
+      lazy: false,
+      child: BlocBuilder<AppCubit, AppState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            title: AppConfig.getUrl,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: state.currentLanguage.locate,
+            supportedLocales: AppLocalizations.supportedLocales,
+            routerConfig: getIt<AppRouter>().config(),
+          );
+        },
+      ),
     );
   }
 }

@@ -34,7 +34,7 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i386.SplashCubit>(() => _i386.SplashCubit());
-    gh.singleton<_i202.AppCubit>(() => _i202.AppCubit());
+    gh.lazySingleton<_i202.AppCubit>(() => _i202.AppCubit());
     gh.factory<_i1048.SharedManager>(
         () => _i1048.SharedManager(gh<_i460.SharedPreferences>()));
     return this;

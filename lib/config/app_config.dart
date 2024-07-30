@@ -7,7 +7,6 @@ import 'package:fortune_teller/config/firebase/firebase_options_dev.dart'
 import 'package:fortune_teller/config/firebase/firebase_options_prod.dart'
     as prod;
 import 'package:fortune_teller/data/services/network_service/common/api_constants.dart';
-import 'package:fortune_teller/injection/di.dart';
 
 enum Flavor {
   dev,
@@ -31,8 +30,6 @@ class AppConfig {
     }
 
     await _initFirebase();
-    configureDependencies(flavor!);
-    await getIt.allReady();
   }
 
   static _initFirebase() async {

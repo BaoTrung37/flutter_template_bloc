@@ -7,6 +7,7 @@
     "**/.fvm": true
   },
   "cSpell.words": [
-    "screenutil"
+    "screenutil",
+    "unfocus"
   ],
 }

@@ -1,0 +1,29 @@
+{
+    "project_info": {
+      "project_number": "204621505853",
+      "project_id": "future-app-cf101",
+      "storage_bucket": "future-app-cf101.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:204621505853:android:73030d60987045c630d154",
+          "android_client_info": {
+            "package_name": "com.example.fortuneTeller.dev"
+          }
+        },
+        "oauth_client": [],
+        "api_key": [
+          {
+            "current_key": "AIzaSyBR1TlIx0q0EknJSFvKUENAi6rIfWCi8k0"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": []
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

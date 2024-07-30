@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fortune_teller/config/app_config.dart';
 import 'package:fortune_teller/injection/di.config.dart';
 import 'package:fortune_teller/presentation/navigation/app_router.dart';
 import 'package:get_it/get_it.dart';
@@ -13,7 +12,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   preferRelativeImports: true,
   asExtension: true,
 )
-void configureDependencies(Flavor flavor) {
-  getIt.init(environment: flavor.name);
+void configureDependencies() {
+  getIt.init();
   getIt.registerSingleton(AppRouter(navigatorKey: navigatorKey));
 }

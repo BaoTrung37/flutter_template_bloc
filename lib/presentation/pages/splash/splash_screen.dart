@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:fortune_teller/config/app_config.dart';
 import 'package:fortune_teller/presentation/navigation/app_router.dart';
 
 @RoutePage()
@@ -14,10 +15,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    AppConfig.init();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(seconds: 2), () {
-        AutoRouter.of(context).replace(const HomeRoute());
-      });
+      AutoRouter.of(context).replace(const HomeRoute());
     });
   }
 
