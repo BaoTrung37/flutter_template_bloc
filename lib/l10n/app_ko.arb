@@ -1,0 +1,7 @@
+{
+    "@@locale": "ko",
+    "app_name": "AAA",
+    "@app_name": {
+    "description": ""
+    }
+}
