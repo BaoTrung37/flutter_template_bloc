@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     AppConfig.init();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AutoRouter.of(context).replace(const HomeRoute());
+      AutoRouter.of(context).replace(const MainAppRoute());
     });
   }
 

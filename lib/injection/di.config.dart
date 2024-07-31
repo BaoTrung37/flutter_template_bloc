@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../data/services/local_service/shared_manager.dart' as _i1048;
 import '../presentation/app/cubit/app_cubit.dart' as _i202;
+import '../presentation/pages/main_app/cubit/bottom_tab_cubit.dart' as _i679;
 import '../presentation/pages/splash/cubit/splash_cubit.dart' as _i386;
 import 'register_module.dart' as _i291;
 
@@ -35,6 +36,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i386.SplashCubit>(() => _i386.SplashCubit());
     gh.lazySingleton<_i202.AppCubit>(() => _i202.AppCubit());
+    gh.lazySingleton<_i679.BottomTabCubit>(() => _i679.BottomTabCubit());
     gh.factory<_i1048.SharedManager>(
         () => _i1048.SharedManager(gh<_i460.SharedPreferences>()));
     return this;

@@ -12,7 +12,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   preferRelativeImports: true,
   asExtension: true,
 )
-void configureDependencies() {
+Future<void> configureDependencies() async {
   getIt.init();
   getIt.registerSingleton(AppRouter(navigatorKey: navigatorKey));
 }
