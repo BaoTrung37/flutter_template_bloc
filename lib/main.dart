@@ -12,10 +12,10 @@ FutureOr<void> main() async {
   Future<void> startApp() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    configureDependencies();
+    Bloc.observer = MyBlocObserver();
+    await configureDependencies();
     await getIt.allReady();
 
-    Bloc.observer = MyBlocObserver();
     runApp(const App());
   }
 

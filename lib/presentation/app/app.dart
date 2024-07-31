@@ -18,6 +18,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final appCubit = getIt<AppCubit>();
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -34,7 +35,7 @@ class _AppState extends State<App> {
 
   Widget _buildBody() {
     return BlocProvider<AppCubit>(
-      create: (context) => getIt<AppCubit>(),
+      create: (context) => appCubit,
       lazy: false,
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
