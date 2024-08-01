@@ -21,7 +21,7 @@ class MainBottomBar extends StatelessWidget {
       TabItem(
         // iconSvg: Assets.icons.icResumeOutline,
         // iconSvgSelected: Assets.icons.icResume,
-        text: 'Profile',
+        text: 'More',
       ),
     ];
     return Column(
@@ -38,7 +38,7 @@ class MainBottomBar extends StatelessWidget {
                   isSelected: page == index,
                 );
               },
-              height: 90.h,
+              backgroundColor: context.colors.secondaryColor,
               activeIndex: page,
               gapLocation: GapLocation.none,
               leftCornerRadius: 20.r,
@@ -73,7 +73,7 @@ class _TabBarItem extends StatelessWidget {
             height: 2.h,
             width: 40.w,
             decoration: BoxDecoration(
-              color: context.colors.primaryColor,
+              color: context.colors.border,
               borderRadius: BorderRadius.only(
                 bottomLeft: const Radius.circular(4).r,
                 bottomRight: const Radius.circular(4).r,
@@ -96,8 +96,8 @@ class _TabBarItem extends StatelessWidget {
               tabItem.text,
               style: AppTextStyles.labelSmall.copyWith(
                 color: isSelected
-                    ? context.colors.primaryColor
-                    : context.colors.primaryColor,
+                    ? context.colors.textPrimary
+                    : context.colors.textSecondary,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

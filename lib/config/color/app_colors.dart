@@ -1,19 +1,38 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class AppColors {
   final Color primaryColor;
+  final Color secondaryColor;
+
+  final Color textPrimary;
+  final Color textSecondary;
+
+  final Color border;
 
   AppColors({
     required this.primaryColor,
+    required this.secondaryColor,
+    required this.textPrimary,
+    required this.textSecondary,
+    required this.border,
   });
 }
 
 final colorsLight = AppColors(
   primaryColor: const Color(0xFF6200EE),
+  secondaryColor: Colors.white,
+  textPrimary: Colors.black,
+  textSecondary: Colors.black.withOpacity(0.6),
+  border: Colors.grey.withOpacity(0.6),
 );
 
 final colorsDark = AppColors(
   primaryColor: const Color(0xFFBB86FC),
+  secondaryColor: Colors.black,
+  textPrimary: Colors.white,
+  textSecondary: Colors.white.withOpacity(0.6),
+  border: Colors.grey.withOpacity(0.6),
 );
 
 extension AppColorsExtension on BuildContext {

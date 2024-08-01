@@ -1,0 +1,12 @@
+import 'package:bloc/bloc.dart';
+import 'package:fortune_teller/presentation/utilities/enums/common/app_status.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
+
+part 'more_cubit.freezed.dart';
+part 'more_state.dart';
+
+@singleton
+class MoreCubit extends Cubit<MoreState> {
+  MoreCubit() : super(const MoreState());
+}

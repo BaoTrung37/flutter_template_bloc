@@ -29,15 +29,26 @@ class _AppState extends State<App> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: child,
       ),
-      child: _buildBody(),
+      child: MyApp(appCubit: appCubit),
     );
   }
+}
 
-  Widget _buildBody() {
+class MyApp extends StatelessWidget {
+  const MyApp({
+    super.key,
+    required this.appCubit,
+  });
+
+  final AppCubit appCubit;
+
+  @override
+  Widget build(BuildContext context) {
     return BlocProvider<AppCubit>(
-      create: (context) => appCubit,
-      lazy: false,
+      create: (contExt) => appCubit..init(),
       child: BlocBuilder<AppCubit, AppState>(
+        buildWhen: (previous, current) =>
+            previous.currentLanguage != current.currentLanguage,
         builder: (context, state) {
           return MaterialApp.router(
             title: AppConfig.getUrl,
