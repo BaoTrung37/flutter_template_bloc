@@ -38,7 +38,7 @@ class MainBottomBar extends StatelessWidget {
                   isSelected: page == index,
                 );
               },
-              backgroundColor: Colors.blue,
+              backgroundColor: context.colors.secondaryColor,
               activeIndex: page,
               gapLocation: GapLocation.none,
               leftCornerRadius: 20.r,
@@ -73,7 +73,7 @@ class _TabBarItem extends StatelessWidget {
             height: 2.h,
             width: 40.w,
             decoration: BoxDecoration(
-              color: context.colors.primaryColor,
+              color: context.colors.border,
               borderRadius: BorderRadius.only(
                 bottomLeft: const Radius.circular(4).r,
                 bottomRight: const Radius.circular(4).r,
@@ -95,7 +95,9 @@ class _TabBarItem extends StatelessWidget {
             Text(
               tabItem.text,
               style: AppTextStyles.labelSmall.copyWith(
-                color: isSelected ? Colors.black : Colors.white,
+                color: isSelected
+                    ? context.colors.textPrimary
+                    : context.colors.textSecondary,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
