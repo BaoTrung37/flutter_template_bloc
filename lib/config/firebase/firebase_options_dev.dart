@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBR1TlIx0q0EknJSFvKUENAi6rIfWCi8k0',
-    appId: '1:204621505853:android:73030d60987045c630d154',
-    messagingSenderId: '204621505853',
-    projectId: 'future-app-cf101',
-    storageBucket: 'future-app-cf101.appspot.com',
+    apiKey: 'AIzaSyCJb9WSVVmTcwydKkWDakXoLHa_n5TISWg',
+    appId: '1:1013018345780:android:f8ed9d666ada726c862561',
+    messagingSenderId: '1013018345780',
+    projectId: 'example-flutter-app-e689d',
+    storageBucket: 'example-flutter-app-e689d.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDisRc0yZ83muDiKT1itsGjI33o46coE9M',
-    appId: '1:204621505853:ios:a7f917db01b0804430d154',
-    messagingSenderId: '204621505853',
-    projectId: 'future-app-cf101',
-    storageBucket: 'future-app-cf101.appspot.com',
-    iosBundleId: 'com.example.fortuneTeller.dev',
+    apiKey: 'AIzaSyCMgH6PEcZJRMeLFaezdEt2WMpKFtDkLiI',
+    appId: '1:1013018345780:ios:e5c3e17b6f2ec290862561',
+    messagingSenderId: '1013018345780',
+    projectId: 'example-flutter-app-e689d',
+    storageBucket: 'example-flutter-app-e689d.appspot.com',
+    iosBundleId: 'com.example.bt.app.dev',
   );
 }

@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDisRc0yZ83muDiKT1itsGjI33o46coE9M</string>
+	<string>AIzaSyCMgH6PEcZJRMeLFaezdEt2WMpKFtDkLiI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>204621505853</string>
+	<string>1013018345780</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.fortuneTeller.dev</string>
+	<string>com.example.bt.app.dev</string>
 	<key>PROJECT_ID</key>
-	<string>future-app-cf101</string>
+	<string>example-flutter-app-e689d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>future-app-cf101.appspot.com</string>
+	<string>example-flutter-app-e689d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:204621505853:ios:c1a9d2a7239e90cd30d154</string>
+	<string>1:1013018345780:ios:e5c3e17b6f2ec290862561</string>
 </dict>
 </plist>
