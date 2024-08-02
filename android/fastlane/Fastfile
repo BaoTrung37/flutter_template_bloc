@@ -15,7 +15,7 @@
 require 'json'
 
 def load_firebase_config(env)
-  config_file = File.read('fastlane/firebase_config.json')
+  config_file = File.read(File.join(__dir__, 'firebase_config.json'))
   config = JSON.parse(config_file)
   config[env]
 end
@@ -37,24 +37,48 @@ platform :android do
     puts "groups_file: #{groups_file}"
     puts "service_credentials_file: #{service_credentials_file}"
     puts "release_notes_file: #{release_notes_file}"
-
+    # gradle(task: "clean")
+    # gradle(task: "assemble", flavor: env, build_type: "Release")
+    
     sh("fvm", "flutter", "clean")
     sh("fvm", "flutter", "packages", "get")
-    sh("fvm", "flutter", "build", "apk", "--release", "--dart-define=ENV=#{env}", "--no-tree-shake-icons")
+    sh("fvm", "flutter", "pub", "run", "build_runner", "build", "--delete-conflicting-outputs")
+    sh("fvm", "flutter", "build", "apk", "--flavor", "#{env}", "-t", "lib/main_#{env}.dart")
 
-    output_path = "../build/app/outputs/apk/#{env}/release/"
-    output_json_path = output_path + "output-metadata.json"
-    build_output = load_json(json_path: output_json_path)
-    elements = build_output["elements"][0]
-    apk_path = output_path + elements["outputFile"]
-
+    apk_path = File.join(__dir__,"build/app/outputs/apk/#{env}/release/app-#{env}-release.apk")
+    puts "Using APK path: #{apk_path}"
+    
     firebase_app_distribution(
       app: app_id,
-      groups_file: groups_file,
       apk_path: apk_path,
+      groups_file: groups_file,
       service_credentials_file: service_credentials_file,
       release_notes_file: release_notes_file
     )
+    
+    # # output_path = File.join(__dir__, "build/app/outputs/apk/#{env}/release/")
+    # output_json_path = File.join(__dir__, "build/app/outputs/apk/#{env}/release/output-metadata.json")
+
+    # if File.exist?(output_json_path)
+    #   begin
+    #     # Read and parse the JSON file
+    #     file_content = File.read(output_json_path)
+    #     build_output = JSON.parse(file_content)
+        
+    #     elements = build_output["elements"][0]
+    #     apk_path = File.join(output_path, elements["outputFile"])
+    
+    #     firebase_app_distribution(
+    #       app: app_id,
+    #       groups_file: groups_file,
+    #       apk_path: apk_path,
+    #     )
+    #   rescue JSON::ParserError
+    #     UI.error("Failed to parse JSON file: #{output_json_path}")
+    #   end
+    # else
+    #   UI.error("File not found: #{output_json_path}")
+    # end
   end
 
   lane :app_distribution_dev do
