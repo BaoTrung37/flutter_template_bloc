@@ -13,25 +13,27 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 require 'json'
+require 'dotenv'
 
-def load_firebase_config(env)
-  config_file = File.read(File.join(__dir__, 'firebase_config.json'))
-  config = JSON.parse(config_file)
-  config[env]
-end
+Dotenv.load '.env'
+
+# def load_firebase_config(env)
+#   config_file = File.read(File.join(__dir__, 'firebase_config.json'))
+#   config = JSON.parse(config_file)
+#   config[env]
+# end
 
 default_platform(:android)
 
 platform :android do
   lane :app_distribution do |options|
     env = options[:env] || "dev"
-    config = load_firebase_config(env)
     
     fastlane_root = File.expand_path(".",__dir__)
-    app_id = config["app_id"]
-    groups_file = File.join(fastlane_root,config["groups_file"])
-    service_credentials_file = File.join(fastlane_root,config["service_credentials_file"])
-    release_notes_file = File.join(fastlane_root,config["release_notes_file"])
+    app_id = ENV["FIREBASE_APP_ID_#{env.upcase}"]
+    groups_file = File.join(fastlane_root,ENV["FIREBASE_GROUPS_FILE_#{env.upcase}"])
+    service_credentials_file = File.join(fastlane_root,ENV["FIREBASE_SERVICE_CREDENTIALS_FILE_#{env.upcase}"])
+    release_notes_file = File.join(fastlane_root,ENV["FIREBASE_RELEASE_NOTES_FILE_#{env.upcase}"])
 
     puts "env: #{env}"
     puts "app_id: #{app_id}"
