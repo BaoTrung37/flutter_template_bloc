@@ -47,3 +47,4 @@ app.*.map.json
 
 # Localizations
 **/app_localizations**.dart
+**/firebase_login_credentials.json

@@ -1,0 +1,93 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+require 'json'
+
+def load_firebase_config(env)
+  config_file = File.read('fastlane/firebase_config.json')
+  config = JSON.parse(config_file)
+  config[env]
+end
+
+default_platform(:android)
+
+platform :android do
+  lane :app_distribution do |options|
+    env = options[:env] || "dev"
+    config = load_firebase_config(env)
+
+    app_id = config["app_id"]
+    groups_file = config["groups_file"]
+    service_credentials_file = config["service_credentials_file"]
+    release_notes_file = config["release_notes_file"]
+
+    puts "env: #{env}"
+    puts "app_id: #{app_id}"
+    puts "groups_file: #{groups_file}"
+    puts "service_credentials_file: #{service_credentials_file}"
+    puts "release_notes_file: #{release_notes_file}"
+
+    sh("fvm", "flutter", "clean")
+    sh("fvm", "flutter", "packages", "get")
+    sh("fvm", "flutter", "build", "apk", "--release", "--dart-define=ENV=#{env}", "--no-tree-shake-icons")
+
+    output_path = "../build/app/outputs/apk/#{env}/release/"
+    output_json_path = output_path + "output-metadata.json"
+    build_output = load_json(json_path: output_json_path)
+    elements = build_output["elements"][0]
+    apk_path = output_path + elements["outputFile"]
+
+    firebase_app_distribution(
+      app: app_id,
+      groups_file: groups_file,
+      apk_path: apk_path,
+      service_credentials_file: service_credentials_file,
+      release_notes_file: release_notes_file
+    )
+  end
+
+  lane :app_distribution_dev do
+    app_distribution(env: "dev")
+  end
+
+  lane :app_distribution_prod do
+    app_distribution(env: "prod")
+  end
+
+  lane :play_store do |options|
+    track = options[:track]
+    puts "track in options: #{track}"
+    if !options[:track]
+      track = "beta"
+    end
+    puts "env: #{track}"
+
+    sh("fastlane", "supply", "init", "--json_key", "../../credentials/play-store.json", "--track", "#{track}")
+
+    sh("flutter", "packages", "get")
+    sh("flutter", "clean")
+    sh("flutter", "build", "appbundle")
+
+    upload_to_play_store(
+      track: track,
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_apk: true
+    )
+  end
+  
+end
