@@ -19,7 +19,7 @@ FutureOr<void> main() async {
     runApp(const App());
   }
 
-  runZonedGuarded(() {
+  runZonedGuarded(() async {
     startApp();
   }, (Object error, StackTrace stackTrace) {
     //
