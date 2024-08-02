@@ -26,26 +26,32 @@ platform :android do
   lane :app_distribution do |options|
     env = options[:env] || "dev"
     config = load_firebase_config(env)
-
+    
+    fastlane_root = File.expand_path(".",__dir__)
     app_id = config["app_id"]
-    groups_file = config["groups_file"]
-    service_credentials_file = config["service_credentials_file"]
-    release_notes_file = config["release_notes_file"]
+    groups_file = File.join(fastlane_root,config["groups_file"])
+    service_credentials_file = File.join(fastlane_root,config["service_credentials_file"])
+    release_notes_file = File.join(fastlane_root,config["release_notes_file"])
 
     puts "env: #{env}"
     puts "app_id: #{app_id}"
     puts "groups_file: #{groups_file}"
     puts "service_credentials_file: #{service_credentials_file}"
     puts "release_notes_file: #{release_notes_file}"
+
     # gradle(task: "clean")
     # gradle(task: "assemble", flavor: env, build_type: "Release")
     
-    sh("fvm", "flutter", "clean")
-    sh("fvm", "flutter", "packages", "get")
-    sh("fvm", "flutter", "pub", "run", "build_runner", "build", "--delete-conflicting-outputs")
-    sh("fvm", "flutter", "build", "apk", "--flavor", "#{env}", "-t", "lib/main_#{env}.dart")
+    # sh("fvm", "flutter", "clean")
+    # sh("fvm", "flutter", "packages", "get")
+    # sh("fvm", "flutter", "pub", "run", "build_runner", "build", "--delete-conflicting-outputs")
+    # sh("fvm", "flutter", "build", "apk", "--flavor", "#{env}", "-t", "lib/main_#{env}.dart")
+    # Define the root directory of the project
+    root_dir = File.expand_path("../../", __dir__)
 
-    apk_path = File.join(__dir__,"build/app/outputs/apk/#{env}/release/app-#{env}-release.apk")
+    # Construct the APK path dynamically from the root directory
+    apk_path = "#{root_dir}/build/app/outputs/apk/#{env}/release/app-#{env}-release.apk"
+
     puts "Using APK path: #{apk_path}"
     
     firebase_app_distribution(
