@@ -39,13 +39,14 @@ platform :android do
     puts "service_credentials_file: #{service_credentials_file}"
     puts "release_notes_file: #{release_notes_file}"
 
-    # gradle(task: "clean")
-    # gradle(task: "assemble", flavor: env, build_type: "Release")
+    gradle(task: "clean")
+    gradle(task: "assemble", flavor: env, build_type: "Release")
     
     # sh("fvm", "flutter", "clean")
     # sh("fvm", "flutter", "packages", "get")
     # sh("fvm", "flutter", "pub", "run", "build_runner", "build", "--delete-conflicting-outputs")
     # sh("fvm", "flutter", "build", "apk", "--flavor", "#{env}", "-t", "lib/main_#{env}.dart")
+  
     # Define the root directory of the project
     root_dir = File.expand_path("../../", __dir__)
 
