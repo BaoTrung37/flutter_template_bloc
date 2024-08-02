@@ -1,0 +1,7 @@
+{
+    "@@locale": "ko",
+    "app_name": "앱",
+    "@app_name": {
+    "description": ""
+    }
+}
