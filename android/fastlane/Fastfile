@@ -122,5 +122,7 @@ platform :android do
       skip_upload_apk: true
     )
   end
-  
+  lane :test do
+    puts "Testing : #{ENV['TEST']}" 
+  end
 end
