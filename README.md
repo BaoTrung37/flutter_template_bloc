@@ -1,6 +1,14 @@
 # Template Flutter Project                   
 Flutter SDK = 3.22.3                             
 # Set up for Development   
+
+### git clone 
+
+```sh
+cp .\assets\env\.env.example .\assets\env\.env
+cp .\assets\env\.env.example .\assets\env\.env.dev
+```
+
 1. Make sure your computer and editor are ready for Flutter development          
 - https://docs.flutter.dev/get-started/editor              
                       

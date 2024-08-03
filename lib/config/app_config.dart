@@ -34,7 +34,7 @@ class AppConfig {
     await EnvKeys.loadEnv(flavor!);
   }
 
-  static _initFirebase() async {
+  static Future<void> _initFirebase() async {
     await Firebase.initializeApp(
       options: firebaseOptions,
     );
@@ -45,7 +45,7 @@ class AppConfig {
     );
     await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     PlatformDispatcher.instance.onError = (error, stack) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
@@ -91,9 +91,6 @@ class AppConfig {
 }
 
 class EnvironmentAttribute {
-  final String apiBaseUrl;
-  final Flavor appEnvironment;
-
   EnvironmentAttribute.devApp()
       : apiBaseUrl = ApiConstants.devBaseUrl,
         appEnvironment = Flavor.dev;
@@ -101,6 +98,8 @@ class EnvironmentAttribute {
   EnvironmentAttribute.prodApp()
       : apiBaseUrl = ApiConstants.prodBaseUrl,
         appEnvironment = Flavor.prod;
+  final String apiBaseUrl;
+  final Flavor appEnvironment;
 
   bool get isDevelopment => appEnvironment == Flavor.dev;
   bool get isProduction => appEnvironment == Flavor.prod;
