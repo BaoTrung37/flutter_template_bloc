@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "app_id": "1:1013018345780:android:f8ed9d666ada726c862561",
+        "groups_file": "dev/groups.txt",
+        "service_credentials_file": "dev/firebase_login_credentials.json",
+        "release_notes_file": "dev/release_notes.txt"
+    },
+    "prod": {
+        "app_id": "1:1013018345780:android:f8ed9d666ada726c862561",
+        "groups_file": "prod/groups.txt",
+        "service_credentials_file": "prod/firebase_login_credentials.json",
+        "release_notes_file": "prod/release_notes.txt"
+    }
+}

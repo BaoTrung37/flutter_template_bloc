@@ -29,7 +29,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
+**/build/
 
 # Symbolication related
 app.*.symbols
@@ -45,4 +45,6 @@ app.*.map.json
 # FVM Version Cache
 .fvm/
 
-# 
+# Localizations
+**/app_localizations**.dart
+**/firebase_login_credentials.json
