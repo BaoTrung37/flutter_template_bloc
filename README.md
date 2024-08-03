@@ -24,12 +24,13 @@ fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 fvm flutter gen-l10n
 ```   
 
-4. Run (use `FC-*` for phase 1). Choose in one of the ways below:
+4. Run (use `` for phase 1). Choose in one of the ways below:
 - Choose and run configuration from editor
 - Run the following command on its root ``:
   
 ```
-flutter run lib/presentation/main.dart --dart-define=ENVIRONMENT=dev-app --dart-define=APP_TYPE=fanclub
+fvm flutter run lib/main_dev.dart --flavor=dev
+fvm flutter run lib/main_prod.dart --flavor=prod
 ```
 
 5. Code formatting (https://docs.flutter.dev/development/tools/formatting)
