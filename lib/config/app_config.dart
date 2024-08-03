@@ -1,3 +1,4 @@
+import 'package:example_flutter_app/config/environment/env_keys.dart';
 import 'package:example_flutter_app/config/firebase/firebase_options_dev.dart'
     as dev;
 import 'package:example_flutter_app/config/firebase/firebase_options_prod.dart'
@@ -30,6 +31,7 @@ class AppConfig {
     }
 
     await _initFirebase();
+    await EnvKeys.loadEnv(flavor!);
   }
 
   static _initFirebase() async {
