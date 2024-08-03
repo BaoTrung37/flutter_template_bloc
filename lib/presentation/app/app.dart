@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fortune_teller/config/app_config.dart';
-import 'package:fortune_teller/config/constants/app_constants.dart';
-import 'package:fortune_teller/injection/di.dart';
-import 'package:fortune_teller/l10n/app_localizations.dart';
-import 'package:fortune_teller/presentation/app/cubit/app_cubit.dart';
-import 'package:fortune_teller/presentation/navigation/app_router.dart';
-import 'package:fortune_teller/presentation/utilities/enums/common/languages.dart';
+import 'package:example_flutter_app/config/app_config.dart';
+import 'package:example_flutter_app/config/constants/app_constants.dart';
+import 'package:example_flutter_app/injection/di.dart';
+import 'package:example_flutter_app/l10n/app_localizations.dart';
+import 'package:example_flutter_app/presentation/app/cubit/app_cubit.dart';
+import 'package:example_flutter_app/presentation/navigation/app_router.dart';
+import 'package:example_flutter_app/presentation/utilities/enums/common/languages.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

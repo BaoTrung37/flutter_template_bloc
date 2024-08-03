@@ -1,12 +1,12 @@
+import 'package:example_flutter_app/config/firebase/firebase_options_dev.dart'
+    as dev;
+import 'package:example_flutter_app/config/firebase/firebase_options_prod.dart'
+    as prod;
+import 'package:example_flutter_app/data/services/network_service/common/api_constants.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:fortune_teller/config/firebase/firebase_options_dev.dart'
-    as dev;
-import 'package:fortune_teller/config/firebase/firebase_options_prod.dart'
-    as prod;
-import 'package:fortune_teller/data/services/network_service/common/api_constants.dart';
 
 enum Flavor {
   dev,

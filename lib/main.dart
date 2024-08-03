@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:example_flutter_app/config/bloc_observer/bloc_observer.dart';
+import 'package:example_flutter_app/injection/di.dart';
+import 'package:example_flutter_app/presentation/app/app.dart';
+import 'package:example_flutter_app/presentation/utilities/logger/app_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fortune_teller/config/bloc_observer/bloc_observer.dart';
-import 'package:fortune_teller/injection/di.dart';
-import 'package:fortune_teller/presentation/app/app.dart';
-import 'package:fortune_teller/presentation/utilities/logger/app_logger.dart';
 
 FutureOr<void> main() async {
   //

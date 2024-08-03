@@ -1,5 +1,5 @@
-import 'package:fortune_teller/data/data.dart';
-import 'package:fortune_teller/presentation/utilities/enums/common/languages.dart';
+import 'package:example_flutter_app/data/data.dart';
+import 'package:example_flutter_app/presentation/utilities/enums/common/languages.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

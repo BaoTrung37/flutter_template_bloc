@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:example_flutter_app/config/app_config.dart';
+import 'package:example_flutter_app/presentation/navigation/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:fortune_teller/config/app_config.dart';
-import 'package:fortune_teller/presentation/navigation/app_router.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget {

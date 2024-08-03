@@ -1,11 +1,11 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:example_flutter_app/config/color/app_colors.dart';
+import 'package:example_flutter_app/injection/di.dart';
+import 'package:example_flutter_app/presentation/pages/main_app/cubit/bottom_tab_cubit.dart';
+import 'package:example_flutter_app/presentation/resources/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fortune_teller/config/color/app_colors.dart';
-import 'package:fortune_teller/injection/di.dart';
-import 'package:fortune_teller/presentation/pages/main_app/cubit/bottom_tab_cubit.dart';
-import 'package:fortune_teller/presentation/resources/app_text_styles.dart';
 
 class MainBottomBar extends StatelessWidget {
   const MainBottomBar({super.key});
