@@ -64,6 +64,7 @@ dependencies:
 
   # Environment
   flutter_flavorizr: ^2.2.3
+  flutter_dotenv: ^5.1.0
 
   # Dependency Injection
   injectable: ^2.4.4
