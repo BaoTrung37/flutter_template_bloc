@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:fortune_teller/presentation/navigation/navigation_pages/navigation_pages.dart';
-import 'package:fortune_teller/presentation/pages/pages.dart';
+import 'package:example_flutter_app/presentation/navigation/navigation_pages/navigation_pages.dart';
+import 'package:example_flutter_app/presentation/pages/pages.dart';
 
 part 'app_router.gr.dart';
 

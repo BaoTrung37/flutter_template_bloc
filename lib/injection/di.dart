@@ -1,6 +1,6 @@
+import 'package:example_flutter_app/injection/di.config.dart';
+import 'package:example_flutter_app/presentation/navigation/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:fortune_teller/injection/di.config.dart';
-import 'package:fortune_teller/presentation/navigation/app_router.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 

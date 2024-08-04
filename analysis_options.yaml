@@ -9,11 +9,46 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  exclude:
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+    - 'lib\l10n\app_localizations*.dart'
+
+  errors:
+    missing_return: error
+    dead_code: error
+    always_declare_return_types: error
+    avoid_web_libraries_in_flutter: error
+    missing_required_param: error
+    file_names: error
+    camel_case_types: error
+    empty_statements: error
+    iterable_contains_unrelated_type: error
+    list_remove_unrelated_type: error
+    no_duplicate_case_values: error
+    unrelated_type_equality_checks: error
+    prefer_single_quotes: error
+    lines_longer_than_80_chars: error
+    omit_local_variable_types: error
+    avoid_redundant_argument_values: error
+    use_key_in_widget_constructors: error
+    sort_child_properties_last: error
+    prefer_asserts_with_message: error
+    prefer_function_declarations_over_variables: error
+    avoid_positional_boolean_parameters: error
+    always_specify_types: ignore
+
+  strong-mode:
+    implicit-casts: true
+    implicit-dynamic: true
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`
   # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
+  # and their documentation is published at
+  # https://dart-lang.github.io/linter/lints/index.html.
   #
   # Instead of disabling a lint rule for the entire project in the
   # section below, it can also be suppressed for a single line of code
@@ -21,8 +56,106 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
-
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+    - annotate_overrides # https://dart-lang.github.io/linter/lints/annotate_overrides.html
+    - avoid_print # https://dart-lang.github.io/linter/lints/avoid_print.html
+    - avoid_null_checks_in_equality_operators # https://dart-lang.github.io/linter/lints/avoid_null_checks_in_equality_operators.html
+    - avoid_relative_lib_imports # https://dart-lang.github.io/linter/lints/avoid_relative_lib_imports.html
+    - always_use_package_imports # https://dart-lang.github.io/linter/lints/always_use_package_imports.html
+    - avoid_unused_constructor_parameters # https://dart-lang.github.io/linter/lints/avoid_unused_constructor_parameters.html
+    - avoid_void_async # https://dart-lang.github.io/linter/lints/avoid_void_async.html
+    - avoid_empty_else # https://dart-lang.github.io/linter/lints/avoid_empty_else.html
+    - avoid_init_to_null # https://dart-lang.github.io/linter/lints/avoid_init_to_null.html
+    - avoid_unnecessary_containers # https://dart-lang.github.io/linter/lints/avoid_unnecessary_containers.html
+    - await_only_futures # https://dart-lang.github.io/linter/lints/await_only_futures.html
+    - always_declare_return_types # https://dart-lang.github.io/linter/lints/always_declare_return_types.html
+    - camel_case_extensions # https://dart-lang.github.io/linter/lints/camel_case_extensions.html
+    - camel_case_types # https://dart-lang.github.io/linter/lints/camel_case_types.html
+    - cancel_subscriptions # https://dart-lang.github.io/linter/lints/cancel_subscriptions.html
+    - close_sinks # https://dart-lang.github.io/linter/lints/close_sinks.html
+    - constant_identifier_names # https://dart-lang.github.io/linter/lints/constant_identifier_names.html
+    - control_flow_in_finally # https://dart-lang.github.io/linter/lints/control_flow_in_finally.html
+    - directives_ordering # https://dart-lang.github.io/linter/lints/directives_ordering.html
+    - empty_statements # https://dart-lang.github.io/linter/lints/empty_statements.html
+    - empty_constructor_bodies # https://dart-lang.github.io/linter/lints/empty_constructor_bodies.html
+    - file_names # https://dart-lang.github.io/linter/lints/file_names.html
+    - hash_and_equals # https://dart-lang.github.io/linter/lints/hash_and_equals.html
+    - implementation_imports # https://dart-lang.github.io/linter/lints/implementation_imports.html
+    - non_constant_identifier_names # https://dart-lang.github.io/linter/lints/non_constant_identifier_names.html
+    - no_duplicate_case_values # https://dart-lang.github.io/linter/lints/no_duplicate_case_values.html
+    - package_api_docs # https://dart-lang.github.io/linter/lints/package_api_docs.html
+    - package_names # https://dart-lang.github.io/linter/lints/package_names.html
+    - package_prefixed_library_names # https://dart-lang.github.io/linter/lints/package_prefixed_library_names.html
+    - prefer_adjacent_string_concatenation # https://dart-lang.github.io/linter/lints/prefer_adjacent_string_concatenation.html
+    - prefer_single_quotes # https://dart-lang.github.io/linter/lints/prefer_single_quotes.html
+    - prefer_final_in_for_each # https://dart-lang.github.io/linter/lints/prefer_final_in_for_each.html
+    - prefer_final_fields # https://dart-lang.github.io/linter/lints/prefer_final_fields.html
+    - prefer_final_locals # https://dart-lang.github.io/linter/lints/prefer_final_locals.html
+    - prefer_for_elements_to_map_fromIterable # er/lints/prefer_for_elements_to_map_fromIterable.html
+    - prefer_if_null_operators # https://dart-lang.github.io/linter/lints/prefer_if_null_operators.html
+    - prefer_if_elements_to_conditional_expressions # https://dart-lang.github.io/linter/lints/prefer_if_elements_to_conditional_expressions.html
+    - prefer_initializing_formals # https://dart-lang.github.io/linter/lints/prefer_initializing_formals.html
+    - prefer_is_empty # https://dart-lang.github.io/linter/lints/prefer_is_empty.html
+    - prefer_is_not_empty # https://dart-lang.github.io/linter/lints/prefer_is_not_empty.html
+    - prefer_null_aware_operators # https://dart-lang.github.io/linter/lints/prefer_null_aware_operators.html
+    - prefer_spread_collections # https://dart-lang.github.io/linter/lints/prefer_spread_collections.html
+    - prefer_typing_uninitialized_variables # https://dart-lang.github.io/linter/lints/prefer_typing_uninitialized_variables.html
+    - test_types_in_equals # https://dart-lang.github.io/linter/lints/test_types_in_equals.html
+    - throw_in_finally # https://dart-lang.github.io/linter/lints/throw_in_finally.html
+    - type_init_formals # https://dart-lang.github.io/linter/lints/type_init_formals.html
+    - sort_child_properties_last # https://dart-lang.github.io/linter/lints/sort_child_properties_last.html
+    - unnecessary_brace_in_string_interps # https://dart-lang.github.io/linter/lints/unnecessary_brace_in_string_interps.html
+    - unnecessary_getters_setters # https://dart-lang.github.io/linter/lints/unnecessary_getters_setters.html
+    - unnecessary_new # https://dart-lang.github.io/linter/lints/unnecessary_new.html
+    - unnecessary_statements # https://dart-lang.github.io/linter/lints/unnecessary_statements.html
+    - unnecessary_this # https://dart-lang.github.io/linter/lints/unnecessary_this.html
+    - unnecessary_await_in_return # https://dart-lang.github.io/linter/lints/unnecessary_await_in_return.html
+    - unawaited_futures # https://dart-lang.github.io/linter/lints/unawaited_futures.html
+    - unnecessary_const # https://dart-lang.github.io/linter/lints/unnecessary_const.html
+    - use_function_type_syntax_for_parameters # https://dart-lang.github.io/linter/lints/use_function_type_syntax_for_parameters.html
+    - unnecessary_null_aware_assignments # https://dart-lang.github.io/linter/lints/unnecessary_null_aware_assignments.html
+    - unnecessary_null_in_if_null_operators # https://dart-lang.github.io/linter/lints/unnecessary_null_in_if_null_operators.html
+    - unnecessary_string_interpolations # https://dart-lang.github.io/linter/lints/unnecessary_string_interpolations.html
+    - use_rethrow_when_possible # https://dart-lang.github.io/linter/lints/use_rethrow_when_possible.html
+    - sized_box_for_whitespace # https://dart-lang.github.io/linter/lints/sized_box_for_whitespace.html
+    - use_key_in_widget_constructors # https://dart-lang.github.io/linter/lints/use_key_in_widget_constructors.html
+    - prefer_void_to_null # https://dart-lang.github.io/linter/lints/prefer_void_to_null.html
+    - prefer_const_declarations # https://dart-lang.github.io/linter/lints/prefer_const_declarations.html
+    - prefer_const_constructors_in_immutables # https://dart-lang.github.io/linter/lints/prefer_const_constructors_in_immutables.html
+    - prefer_const_constructors # https://dart-lang.github.io/linter/lints/prefer_const_constructors.html
+    - only_throw_errors # https://dart-lang.github.io/linter/lints/only_throw_errors.html
+    - no_logic_in_create_state # https://dart-lang.github.io/linter/lints/no_logic_in_create_state.html
+    - avoid_web_libraries_in_flutter # https://dart-lang.github.io/linter/lints/avoid_web_libraries_in_flutter.html
+    - avoid_bool_literals_in_conditional_expressions # https://dart-lang.github.io/linter/lints/avoid_bool_literals_in_conditional_expressions.html
+    - prefer_const_literals_to_create_immutables # https://dart-lang.github.io/linter/lints/prefer_const_literals_to_create_immutables.html
+    - always_put_control_body_on_new_line # https://dart-lang.github.io/linter/lints/always_put_control_body_on_new_line.html
+    - sort_unnamed_constructors_first # https://dart-lang.github.io/linter/lints/sort_unnamed_constructors_first.html
+    - prefer_int_literals # https://dart-lang.github.io/linter/lints/prefer_int_literals.html
+    - avoid_returning_null_for_void # https://dart-lang.github.io/linter/lints/avoid_returning_null_for_void.html
+    - invariant_booleans # https://dart-lang.github.io/linter/lints/invariant_booleans.html
+    - literal_only_boolean_expressions # https://dart-lang.github.io/linter/lints/literal_only_boolean_expressions.html
+    - valid_regexps # https://dart-lang.github.io/linter/lints/valid_regexps.html
+    - avoid_escaping_inner_quotes # https://dart-lang.github.io/linter/lints/avoid_escaping_inner_quotes.html
+    - curly_braces_in_flow_control_structures # https://dart-lang.github.io/linter/lints/curly_braces_in_flow_control_structures.html
+    - join_return_with_assignment # https://dart-lang.github.io/linter/lints/join_return_with_assignment.html
+    - leading_newlines_in_multiline_strings # https://dart-lang.github.io/linter/lints/leading_newlines_in_multiline_strings.html
+    - library_prefixes # https://dart-lang.github.io/linter/lints/library_prefixes.html
+    - prefer_conditional_assignment # https://dart-lang.github.io/linter/lints/prefer_conditional_assignment.html
+    - prefer_contains # https://dart-lang.github.io/linter/lints/prefer_contains.html
+    - prefer_inlined_adds # https://dart-lang.github.io/linter/lints/prefer_inlined_adds.html
+    - prefer_is_not_operator # https://dart-lang.github.io/linter/lints/prefer_is_not_operator.html
+    - recursive_getters # https://dart-lang.github.io/linter/lints/recursive_getters.html
+    - always_put_required_named_parameters_first # https://dart-lang.github.io/linter/lints/always_put_required_named_parameters_first.html
+    - avoid_implementing_value_types # https://dart-lang.github.io/linter/lints/avoid_implementing_value_types.html
+    - avoid_types_as_parameter_names # https://dart-lang.github.io/linter/lints/avoid_types_as_parameter_names.html
+    - omit_local_variable_types # https://dart-lang.github.io/linter/lints/omit_local_variable_types.html
+    - unrelated_type_equality_checks # https://dart-lang.github.io/linter/lints/unrelated_type_equality_checks.html
+    - unnecessary_parenthesis # https://dart-lang.github.io/linter/lints/unnecessary_parenthesis.html
+    - unnecessary_overrides # https://dart-lang.github.io/linter/lints/unnecessary_overrides.html
+    - unnecessary_string_escapes # https://dart-lang.github.io/linter/lints/unnecessary_string_escapes.html
+    - exhaustive_cases # https://dart-lang.github.io/linter/lints/exhaustive_cases.html
+    - empty_catches # https://dart-lang.github.io/linter/lints/empty_catches.html
+    - no_adjacent_strings_in_list # https://dart-lang.github.io/linter/lints/no_adjacent_strings_in_list.html
+    - no_runtimeType_toString # https://dart-lang.github.io/linter/lints/no_runtimeType_toString.html
+    - overridden_fields # https://dart-lang.github.io/linter/lints/overridden_fields.html
+    - parameter_assignments # https://dart-lang.github.io/linter/lints/parameter_assignments.html
+    - sort_constructors_first # https://dart-lang.github.io/linter/lints/sort_constructors_first.html (Let's discuss this one)

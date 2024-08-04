@@ -1,4 +1,4 @@
-import 'package:fortune_teller/config/app_config.dart';
+import 'package:example_flutter_app/config/app_config.dart';
 
 import 'main.dart' as runner;
 

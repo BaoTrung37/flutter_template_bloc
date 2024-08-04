@@ -1,12 +1,13 @@
+import 'package:example_flutter_app/config/environment/env_keys.dart';
+import 'package:example_flutter_app/config/firebase/firebase_options_dev.dart'
+    as dev;
+import 'package:example_flutter_app/config/firebase/firebase_options_prod.dart'
+    as prod;
+import 'package:example_flutter_app/data/services/network_service/common/api_constants.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:fortune_teller/config/firebase/firebase_options_dev.dart'
-    as dev;
-import 'package:fortune_teller/config/firebase/firebase_options_prod.dart'
-    as prod;
-import 'package:fortune_teller/data/services/network_service/common/api_constants.dart';
 
 enum Flavor {
   dev,
@@ -30,9 +31,10 @@ class AppConfig {
     }
 
     await _initFirebase();
+    await EnvKeys.loadEnv(flavor!);
   }
 
-  static _initFirebase() async {
+  static Future<void> _initFirebase() async {
     await Firebase.initializeApp(
       options: firebaseOptions,
     );
@@ -43,7 +45,7 @@ class AppConfig {
     );
     await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     PlatformDispatcher.instance.onError = (error, stack) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
@@ -89,9 +91,6 @@ class AppConfig {
 }
 
 class EnvironmentAttribute {
-  final String apiBaseUrl;
-  final Flavor appEnvironment;
-
   EnvironmentAttribute.devApp()
       : apiBaseUrl = ApiConstants.devBaseUrl,
         appEnvironment = Flavor.dev;
@@ -99,6 +98,8 @@ class EnvironmentAttribute {
   EnvironmentAttribute.prodApp()
       : apiBaseUrl = ApiConstants.prodBaseUrl,
         appEnvironment = Flavor.prod;
+  final String apiBaseUrl;
+  final Flavor appEnvironment;
 
   bool get isDevelopment => appEnvironment == Flavor.dev;
   bool get isProduction => appEnvironment == Flavor.prod;

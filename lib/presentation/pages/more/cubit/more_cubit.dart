@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:fortune_teller/presentation/utilities/enums/common/app_status.dart';
+import 'package:example_flutter_app/presentation/utilities/enums/common/app_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
