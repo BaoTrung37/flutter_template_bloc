@@ -5,8 +5,8 @@ Flutter SDK = 3.22.3
 ### git clone 
 
 ```sh
-cp .\assets\env\.env.example .\assets\env\.env
-cp .\assets\env\.env.example .\assets\env\.env.dev
+cp env.example env
+cp env.example env.dev
 ```
 
 1. Make sure your computer and editor are ready for Flutter development          
