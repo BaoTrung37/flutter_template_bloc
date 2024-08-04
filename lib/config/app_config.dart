@@ -1,9 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:example_flutter_app/config/environment/env_keys.dart';
 import 'package:example_flutter_app/config/firebase/firebase_options_dev.dart'
     as dev;
 import 'package:example_flutter_app/config/firebase/firebase_options_prod.dart'
     as prod;
-import 'package:example_flutter_app/data/services/network_service/common/api_constants.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -11,30 +11,22 @@ import 'package:flutter/foundation.dart';
 
 enum Flavor {
   dev,
-  prod,
+  prod;
 }
 
 class AppConfig {
-  AppConfig._private();
-  static Flavor? flavor;
+  final Flavor flavor;
+  AppConfig({
+    required this.flavor,
+  });
 
-  static String get name => flavor?.name ?? '';
+  String get name => flavor.name;
 
-  static Future<void> init() async {
-    switch (flavor) {
-      case Flavor.dev:
-        break;
-      case Flavor.prod:
-        break;
-      default:
-        break;
-    }
-
+  Future<void> init() async {
     await _initFirebase();
-    await EnvKeys.loadEnv(flavor!);
   }
 
-  static Future<void> _initFirebase() async {
+  Future<void> _initFirebase() async {
     await Firebase.initializeApp(
       options: firebaseOptions,
     );
@@ -52,7 +44,7 @@ class AppConfig {
     };
   }
 
-  static String get title {
+  String get title {
     switch (flavor) {
       case Flavor.dev:
         return 'App Dev';
@@ -63,7 +55,7 @@ class AppConfig {
     }
   }
 
-  static EnvironmentAttribute get environmentAttribute {
+  EnvironmentAttribute get environmentAttribute {
     switch (flavor) {
       case Flavor.dev:
         return EnvironmentAttribute.devApp();
@@ -74,7 +66,7 @@ class AppConfig {
     }
   }
 
-  static FirebaseOptions get firebaseOptions {
+  FirebaseOptions get firebaseOptions {
     switch (flavor) {
       case Flavor.dev:
         return dev.DefaultFirebaseOptions.currentPlatform;
@@ -85,22 +77,18 @@ class AppConfig {
     }
   }
 
-  static String get getUrl => environmentAttribute.apiBaseUrl;
-  static bool get isDevelopment => environmentAttribute.isDevelopment;
-  static bool get isProduction => environmentAttribute.isProduction;
+  String get baseUrl => environmentAttribute.baseUrl;
+  bool get isDevelopment => environmentAttribute.isDevelopment;
+  bool get isProduction => environmentAttribute.isProduction;
 }
 
 class EnvironmentAttribute {
-  EnvironmentAttribute.devApp()
-      : apiBaseUrl = ApiConstants.devBaseUrl,
-        appEnvironment = Flavor.dev;
+  EnvironmentAttribute.devApp() : appEnvironment = Flavor.dev;
 
-  EnvironmentAttribute.prodApp()
-      : apiBaseUrl = ApiConstants.prodBaseUrl,
-        appEnvironment = Flavor.prod;
-  final String apiBaseUrl;
+  EnvironmentAttribute.prodApp() : appEnvironment = Flavor.prod;
   final Flavor appEnvironment;
 
+  String get baseUrl => EnvKeys.baseUrl;
   bool get isDevelopment => appEnvironment == Flavor.dev;
   bool get isProduction => appEnvironment == Flavor.prod;
 }

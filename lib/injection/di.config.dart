@@ -12,7 +12,14 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../data/data.dart' as _i433;
 import '../data/services/local_service/shared_manager.dart' as _i1048;
+import '../data/services/network_service/interceptors/auth_interceptor.dart'
+    as _i755;
+import '../data/services/network_service/interceptors/common_header_interceptor.dart'
+    as _i752;
+import '../data/services/network_service/interceptors/token_refresh_interceptor.dart'
+    as _i12;
 import '../presentation/app/cubit/app_cubit.dart' as _i202;
 import '../presentation/pages/main_app/cubit/bottom_tab_cubit.dart' as _i679;
 import '../presentation/pages/more/cubit/more_cubit.dart' as _i991;
@@ -31,6 +38,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
+    gh.factory<_i755.AuthInterceptor>(() => _i755.AuthInterceptor());
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => registerModule.shared,
       preResolve: true,
@@ -40,6 +48,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i679.BottomTabCubit>(() => _i679.BottomTabCubit());
     gh.factory<_i1048.SharedManager>(
         () => _i1048.SharedManager(gh<_i460.SharedPreferences>()));
+    gh.factory<_i12.TokenRefreshInterceptor>(() =>
+        _i12.TokenRefreshInterceptor(sharedManager: gh<_i433.SharedManager>()));
+    gh.factory<_i752.CommonHeaderInterceptor>(
+        () => _i752.CommonHeaderInterceptor(gh<_i433.SharedManager>()));
     gh.singleton<_i202.AppCubit>(
         () => _i202.AppCubit(gh<_i1048.SharedManager>()));
     return this;

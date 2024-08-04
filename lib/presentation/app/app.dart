@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:example_flutter_app/config/app_config.dart';
 import 'package:example_flutter_app/config/constants/app_constants.dart';
 import 'package:example_flutter_app/injection/di.dart';
@@ -9,6 +5,10 @@ import 'package:example_flutter_app/l10n/app_localizations.dart';
 import 'package:example_flutter_app/presentation/app/cubit/app_cubit.dart';
 import 'package:example_flutter_app/presentation/navigation/app_router.dart';
 import 'package:example_flutter_app/presentation/utilities/enums/common/languages.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -36,8 +36,8 @@ class _AppState extends State<App> {
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    super.key,
     required this.appCubit,
+    super.key,
   });
 
   final AppCubit appCubit;
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             previous.currentLanguage != current.currentLanguage,
         builder: (context, state) {
           return MaterialApp.router(
-            title: AppConfig.getUrl,
+            title: getIt<AppConfig>().title,
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
