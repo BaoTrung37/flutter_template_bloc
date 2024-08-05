@@ -32,7 +32,7 @@ migrate_working_dir/
 **/build/
 **/*.g.dart
 **/*.freezed.dart
-**di.config.dart
+*.config.dart
 
 # iOS related
 ios/Podfile.lock
