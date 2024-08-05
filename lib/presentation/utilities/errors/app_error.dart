@@ -1,7 +1,6 @@
 class AppError {
-  final String? message;
-
   AppError({
     this.message,
   });
+  final String? message;
 }

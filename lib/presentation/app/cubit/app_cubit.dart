@@ -17,7 +17,7 @@ class AppCubit extends Cubit<AppState> {
 
   final SharedManager sharedManager;
 
-  void init() async {
+  Future<void> init() async {
     emit(state.copyWith(status: AppStatus.initial));
     final currentLanguageCode = await sharedManager.getLanguageCode();
     final language = Languages.values.firstWhere(
@@ -32,7 +32,7 @@ class AppCubit extends Cubit<AppState> {
     );
   }
 
-  void changeLanguage(Languages language) async {
+  Future<void> changeLanguage(Languages language) async {
     await sharedManager.saveLanguageCode(language.languageCode);
     emit(state.copyWith(currentLanguage: language));
   }

@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              AppLocalizations.of(context)!.app_name,
+              AppLocalizations.of(context)!.appName,
             ),
           ],
         ),

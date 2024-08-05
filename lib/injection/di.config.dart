@@ -38,11 +38,11 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
-    gh.factory<_i755.AuthInterceptor>(() => _i755.AuthInterceptor());
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => registerModule.shared,
       preResolve: true,
     );
+    gh.factory<_i755.AuthInterceptor>(() => _i755.AuthInterceptor());
     gh.factory<_i386.SplashCubit>(() => _i386.SplashCubit());
     gh.singleton<_i991.MoreCubit>(() => _i991.MoreCubit());
     gh.lazySingleton<_i679.BottomTabCubit>(() => _i679.BottomTabCubit());

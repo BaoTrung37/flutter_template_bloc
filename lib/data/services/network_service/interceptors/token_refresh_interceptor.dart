@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
 import 'package:example_flutter_app/data/data.dart';
-import 'package:example_flutter_app/data/services/network_service/error/api_error.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
