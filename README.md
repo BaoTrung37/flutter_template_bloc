@@ -4,9 +4,18 @@ Flutter SDK = 3.22.3
 
 ### Git clone appp
 
+If you have `Makefile` use this command below
 ```sh
+make first_run
+```
+otherwise
+```sh
+fvm use 3.22.3
 cp .env.example .env
 cp .env.example .env.dev
+fvm flutter pub get     
+fvm flutter packages pub run build_runner build --delete-conflicting-outputs
+fvm flutter gen-l10n
 ```
 
 1. Make sure your computer and editor are ready for Flutter development          
