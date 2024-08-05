@@ -1,3 +1,7 @@
+first_run:
+	fvm use 3.22.3
+	make rebuild
+	
 clean:
 	fvm flutter clean
 
