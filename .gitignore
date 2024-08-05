@@ -33,6 +33,7 @@ migrate_working_dir/
 **/*.g.dart
 **/*.freezed.dart
 *.config.dart
+**.gr.dart
 
 # iOS related
 ios/Podfile.lock
@@ -57,4 +58,3 @@ app.*.map.json
  
 *.env*
 !.env.example
-lib/injection/di.config.dart
