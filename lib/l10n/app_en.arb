@@ -1,7 +1,7 @@
 {
     "@@locale": "en",
-    "app_name": "App",
-    "@app_name": {
+    "appName": "App",
+    "@appName": {
     "description": ""
     }
 }

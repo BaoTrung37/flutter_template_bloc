@@ -30,6 +30,12 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 **/build/
+**/*.g.dart
+**/*.freezed.dart
+*.config.dart
+
+# iOS related
+ios/Podfile.lock
 
 # Symbolication related
 app.*.symbols
@@ -51,3 +57,4 @@ app.*.map.json
  
 *.env*
 !.env.example
+lib/injection/di.config.dart

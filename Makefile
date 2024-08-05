@@ -1,3 +1,9 @@
+first_run:
+	fvm use 3.22.3
+	@cp .env.example .env
+	@cp .env.example .env.dev
+	make rebuild
+
 clean:
 	fvm flutter clean
 
