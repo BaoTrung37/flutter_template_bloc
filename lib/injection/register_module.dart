@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:example_flutter_app/data/data.dart';
+import 'package:example_flutter_app/injection/di.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -5,4 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class RegisterModule {
   @preResolve
   Future<SharedPreferences> get shared => SharedPreferences.getInstance();
+
+  @injectable
+  RestClient get restClient => RestClient(getIt<Dio>());
 }
