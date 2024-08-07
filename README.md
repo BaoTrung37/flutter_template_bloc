@@ -2,7 +2,7 @@
 Flutter SDK = 3.22.3                             
 # Set up for Development   
 
-### Git clone appp
+### Git clone app
 
 If you have `Makefile` use this command below
 ```sh
