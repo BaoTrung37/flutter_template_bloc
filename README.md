@@ -109,6 +109,6 @@ graph TD;
 
 # Git and Pull Requests rules
 
-- Pull requests are sent to 'develop' branch
+- Pull requests are sent to 'main' branch
 - Please fill in completely the pull request template
 - The assignee is the responsible of pull request merging and conflict solving
