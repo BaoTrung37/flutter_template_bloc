@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 part 'more_cubit.freezed.dart';
 part 'more_state.dart';
 
-@singleton
+@lazySingleton
 class MoreCubit extends Cubit<MoreState> {
   MoreCubit() : super(const MoreState());
 }
