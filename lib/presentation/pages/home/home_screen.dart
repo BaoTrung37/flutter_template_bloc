@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:example_flutter_app/l10n/app_localizations.dart';
+import 'package:example_flutter_app/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              AppLocalizations.of(context)!.appName,
+              context.localizations.appName,
             ),
           ],
         ),
