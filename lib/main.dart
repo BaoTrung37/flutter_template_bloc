@@ -8,6 +8,7 @@ import 'package:example_flutter_app/presentation/app/app.dart';
 import 'package:example_flutter_app/presentation/utilities/logger/app_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 FutureOr<void> mainApp(Flavor flavor) async {
   //
@@ -26,12 +27,23 @@ FutureOr<void> mainApp(Flavor flavor) async {
     await getIt.allReady();
 
     runApp(const App());
+
+    EasyLoading.instance
+      ..backgroundColor = Colors.transparent
+      ..boxShadow = <BoxShadow>[]
+      ..indicatorColor = Colors.grey
+      ..indicatorType = EasyLoadingIndicatorType.circle
+      ..indicatorSize = 40
+      ..maskType = EasyLoadingMaskType.black
+      ..textColor = Colors.grey
+      ..progressColor = Colors.grey
+      ..loadingStyle = EasyLoadingStyle.custom;
   }
 
-  unawaited(runZonedGuarded(() async {
+  await runZonedGuarded(() async {
     await startApp();
   }, (Object error, StackTrace stackTrace) {
     //
     lg.e('runZonedGuarded Error: $error');
-  }));
+  });
 }

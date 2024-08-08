@@ -12,8 +12,6 @@ class CommonHeaderInterceptor extends Interceptor {
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    // final language = await sharedPreferencesManager.getLanguage() ?? 'vi';
-    // options.queryParameters['language'] = language;
     return handler.next(options);
   }
 }

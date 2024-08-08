@@ -5,8 +5,7 @@ import 'package:injectable/injectable.dart';
 class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // options.headers['Authorization'] = 'Bearer ${EnvKeys.token}';
-    // options.queryParameters['api_key'] = EnvKeys.apiKey;
+    // options.headers['Authorization'] = 'Bearer $token';
     handler.next(options);
   }
 }
