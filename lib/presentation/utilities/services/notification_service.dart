@@ -13,7 +13,7 @@ class NotificationService {
     Function(NotificationResponse)? onDidReceiveNotificationResponse,
   }) async {
     const initializationSettingsAndroid =
-        AndroidInitializationSettings('@drawable/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     final initializationSettingsDarwin = DarwinInitializationSettings(
       onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
