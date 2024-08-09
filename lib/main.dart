@@ -6,7 +6,7 @@ import 'package:example_flutter_app/config/environment/env_keys.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/presentation/app/app.dart';
 import 'package:example_flutter_app/presentation/utilities/logger/app_logger.dart';
-import 'package:example_flutter_app/presentation/utilities/services/notification_service.dart';
+import 'package:example_flutter_app/presentation/utilities/services/notification/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
