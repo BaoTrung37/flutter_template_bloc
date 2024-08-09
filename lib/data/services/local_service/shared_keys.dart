@@ -1,4 +1,4 @@
 enum SharedKeys {
-  firstTime,
+  firstTimeLaunch,
   languageCode,
 }

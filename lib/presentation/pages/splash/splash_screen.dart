@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:example_flutter_app/config/app_config.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/presentation/navigation/app_router.dart';
+import 'package:example_flutter_app/presentation/pages/splash/cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -13,16 +14,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _splashCubit = getIt<SplashCubit>();
   @override
   void initState() {
     super.initState();
-
-    getIt<AppConfig>().init();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (mounted) {
-        await AutoRouter.of(context).replace(const MainAppRoute());
-      }
+    Future.delayed(Duration.zero, () async {
+      await _initialize();
     });
+  }
+
+  Future<void> _initialize() async {
+    await getIt<AppConfig>().init();
+
+    await _navigateToNextScreen();
+  }
+
+  Future<void> _navigateToNextScreen() async {
+    if (_splashCubit.isFirstTimeLaunch) {
+      // Navigate to Onboarding Screen
+      await getIt<AppRouter>().replace(const MainAppRoute());
+    } else {
+      await getIt<AppRouter>().replace(const MainAppRoute());
+    }
   }
 
   @override

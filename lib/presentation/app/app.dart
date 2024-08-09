@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AppCubit>(
-      create: (contExt) => appCubit..init(),
+      create: (contExt) => appCubit,
       child: BlocBuilder<AppCubit, AppState>(
         buildWhen: (previous, current) =>
             previous.currentLanguage != current.currentLanguage,
