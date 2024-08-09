@@ -26,15 +26,16 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _initialize() async {
     await getIt<AppConfig>().init();
 
-    if (_splashCubit.isFirstTimeLaunch) {
-      await _navigateToNextScreen();
-    } else {
-      await getIt<AppRouter>().replace(const MainAppRoute());
-    }
+    await _navigateToNextScreen();
   }
 
   Future<void> _navigateToNextScreen() async {
-    // await getIt<AppRouter>().replace(const MainAppRoute());
+    if (_splashCubit.isFirstTimeLaunch) {
+      // Navigate to Onboarding Screen
+      await getIt<AppRouter>().replace(const MainAppRoute());
+    } else {
+      await getIt<AppRouter>().replace(const MainAppRoute());
+    }
   }
 
   @override
