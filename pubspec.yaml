@@ -86,6 +86,9 @@ dependencies:
   firebase_analytics: ^11.2.0
   firebase_crashlytics: ^4.0.3
 
+  # Utilities
+  url_launcher: ^6.3.0
+
 
 dev_dependencies:
   flutter_test:

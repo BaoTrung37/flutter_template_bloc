@@ -13,13 +13,17 @@ part 'app_state.dart';
 class AppCubit extends Cubit<AppState> {
   AppCubit(
     this.sharedManager,
-  ) : super(const AppState());
+  ) : super(const AppState()) {
+    Future.delayed(Duration.zero, () {
+      init();
+    });
+  }
 
   final SharedManager sharedManager;
 
   Future<void> init() async {
     emit(state.copyWith(status: AppStatus.initial));
-    final currentLanguageCode = await sharedManager.getLanguageCode();
+    final currentLanguageCode = sharedManager.getLanguageCode();
     final language = Languages.values.firstWhere(
       (element) => element.languageCode == currentLanguageCode,
       orElse: () => Languages.en,

@@ -4,7 +4,6 @@ import 'package:example_flutter_app/config/firebase/firebase_options_dev.dart'
     as dev;
 import 'package:example_flutter_app/config/firebase/firebase_options_prod.dart'
     as prod;
-import 'package:example_flutter_app/presentation/utilities/services/notification/notification_service.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
