@@ -23,6 +23,7 @@ class LoadingView extends StatelessWidget {
         EasyLoading.show();
         return Container();
       case AppStatus.error:
+        EasyLoading.dismiss();
         return errorView ?? Container();
     }
   }
