@@ -18,6 +18,7 @@ FutureOr<void> mainApp(Flavor flavor) async {
     final appConfig = AppConfig(
       flavor: flavor,
     );
+    AppLogger.instance.init();
 
     await EnvKeys.loadEnv(flavor);
 
