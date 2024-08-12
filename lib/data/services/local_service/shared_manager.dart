@@ -15,7 +15,7 @@ class SharedManager {
       SharedKeys.firstTimeLaunch.name,
       false,
     );
-    lg.d('First time launch saved');
+    AppLogger.instance.logD('First time launch saved');
   }
 
   bool getFirstTimeLaunch() {
@@ -24,7 +24,7 @@ class SharedManager {
 
   Future<void> removeFirstTimeLaunch() async {
     await _sharedPreferences.remove(SharedKeys.firstTimeLaunch.name);
-    lg.d('First time launch removed');
+    AppLogger.instance.logD('First time launch removed');
   }
 
   //* Language Code
@@ -33,7 +33,7 @@ class SharedManager {
       SharedKeys.languageCode.name,
       languageCode,
     );
-    lg.d('Language code saved: $languageCode');
+    AppLogger.instance.logD('Language code saved: $languageCode');
   }
 
   String getLanguageCode() {
@@ -43,6 +43,6 @@ class SharedManager {
 
   Future<void> removeLanguageCode() async {
     await _sharedPreferences.remove(SharedKeys.languageCode.name);
-    lg.d('Language code removed');
+    AppLogger.instance.logD('Language code removed');
   }
 }
