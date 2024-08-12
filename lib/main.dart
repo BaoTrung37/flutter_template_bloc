@@ -29,10 +29,11 @@ FutureOr<void> mainApp(Flavor flavor) async {
 
     await NotificationService.instance.initialize(
       onDidReceiveLocalNotification: (id, title, body, payload) async {
-        lg.d('onDidReceiveLocalNotification: $id, $title, $body, $payload');
+        AppLogger.instance.logD(
+            'onDidReceiveLocalNotification: $id, $title, $body, $payload');
       },
       onDidReceiveNotificationResponse: (response) async {
-        lg.d('onDidReceiveNotificationResponse: $response');
+        AppLogger.instance.logD('onDidReceiveNotificationResponse: $response');
       },
     );
     runApp(const App());
@@ -52,7 +53,6 @@ FutureOr<void> mainApp(Flavor flavor) async {
   await runZonedGuarded(() async {
     await startApp();
   }, (Object error, StackTrace stackTrace) {
-    //
-    lg.e('runZonedGuarded Error: $error');
+    AppLogger.instance.logD('runZonedGuarded Error: $error');
   });
 }
