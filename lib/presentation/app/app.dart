@@ -1,5 +1,6 @@
 import 'package:example_flutter_app/config/app_config.dart';
 import 'package:example_flutter_app/config/constants/app_constants.dart';
+import 'package:example_flutter_app/config/theme/app_theme.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/l10n/app_localizations.dart';
 import 'package:example_flutter_app/presentation/app/cubit/app_cubit.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
+            theme: getThemeData(Brightness.light),
             locale: state.currentLanguage.locate,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: getIt<AppRouter>().config(),
