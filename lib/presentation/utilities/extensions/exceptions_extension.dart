@@ -7,7 +7,7 @@ extension ErrorExtension on Exception {
   }
 
   AppError? get appError {
-    lg.e(message);
+    AppLogger.instance.logE(message);
     return AppError(
       message: message,
     );
