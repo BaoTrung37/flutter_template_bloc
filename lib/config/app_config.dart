@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:example_flutter_app/config/environment/env_keys.dart';
 import 'package:example_flutter_app/config/firebase/firebase_options_dev.dart'
     as dev;
 import 'package:example_flutter_app/config/firebase/firebase_options_prod.dart'
     as prod;
+import 'package:example_flutter_app/data/data.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -19,8 +19,6 @@ class AppConfig {
   AppConfig({
     required this.flavor,
   });
-
-  String get name => flavor.name;
 
   Future<void> init() async {
     await _initFirebase();
@@ -83,12 +81,16 @@ class AppConfig {
 }
 
 class EnvironmentAttribute {
-  EnvironmentAttribute.devApp() : appEnvironment = Flavor.dev;
+  EnvironmentAttribute.devApp()
+      : appEnvironment = Flavor.dev,
+        baseUrl = ApiConstants.devBaseUrl;
 
-  EnvironmentAttribute.prodApp() : appEnvironment = Flavor.prod;
+  EnvironmentAttribute.prodApp()
+      : appEnvironment = Flavor.prod,
+        baseUrl = ApiConstants.prodBaseUrl;
   final Flavor appEnvironment;
+  final String baseUrl;
 
-  String get baseUrl => EnvKeys.baseUrl;
   bool get isDevelopment => appEnvironment == Flavor.dev;
   bool get isProduction => appEnvironment == Flavor.prod;
 }

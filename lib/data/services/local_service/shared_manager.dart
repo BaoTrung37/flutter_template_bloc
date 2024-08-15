@@ -45,4 +45,22 @@ class SharedManager {
     await _sharedPreferences.remove(SharedKeys.languageCode.name);
     AppLogger.instance.logD('Language code removed');
   }
+
+  //* Access Token
+  Future<void> saveAccessToken(String accessToken) async {
+    await _sharedPreferences.setString(
+      SharedKeys.accessToken.name,
+      accessToken,
+    );
+    AppLogger.instance.logD('Access token saved');
+  }
+
+  String getAccessToken() {
+    return _sharedPreferences.getString(SharedKeys.accessToken.name) ?? '';
+  }
+
+  Future<void> removeAccessToken() async {
+    await _sharedPreferences.remove(SharedKeys.accessToken.name);
+    AppLogger.instance.logD('Access token removed');
+  }
 }
