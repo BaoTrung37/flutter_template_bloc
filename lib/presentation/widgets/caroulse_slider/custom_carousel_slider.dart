@@ -30,7 +30,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 472.h,
+      height: 372.h,
       child: PageView.builder(
         controller: _pageController,
         itemBuilder: (context, index) {
@@ -46,10 +46,21 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
       builder: (context, child) {
         var value = _currentOffset - index;
         value = (value * 0.03).clamp(-1, 1);
-        print('value: $value');
+
+        var value2 = _currentOffset - index;
+        value2 = (value2 * 100).clamp(-100, 100);
+
+        var value3 = _currentOffset - index;
+        value3 = (1 - (value3.abs() * 0.3)).clamp(0.8, 1.0);
         return Transform.rotate(
           angle: value * -pi,
-          child: child,
+          child: Transform.scale(
+            scale: value3,
+            child: Transform.translate(
+              offset: Offset(value2, 0),
+              child: child,
+            ),
+          ),
         );
       },
       child: Container(
