@@ -18,7 +18,7 @@ flavors:
     app:
       name: "App"
     android:
-      applicationId: com.example.bt.app"
+      applicationId: "com.example.bt.app"
       # icon: "assets/images/logo_app.png"
       firebase:
         config: "android/app/src/prod/google-services.json"
