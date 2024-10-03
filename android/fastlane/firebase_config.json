@@ -1,12 +1,12 @@
 {
     "dev": {
-        "app_id": "1:1013018345780:android:f8ed9d666ada726c862561",
+        "app_id": "1:255872992865:android:e9ab4e16456daad1914c20",
         "groups_file": "dev/groups.txt",
         "service_credentials_file": "dev/firebase_login_credentials.json",
         "release_notes_file": "dev/release_notes.txt"
     },
     "prod": {
-        "app_id": "1:1013018345780:android:f8ed9d666ada726c862561",
+        "app_id": "1:458859110201:android:a13cd7a87d17de39dd92e8",
         "groups_file": "prod/groups.txt",
         "service_credentials_file": "prod/firebase_login_credentials.json",
         "release_notes_file": "prod/release_notes.txt"
