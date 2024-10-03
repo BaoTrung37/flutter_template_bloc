@@ -4,12 +4,12 @@ flavors:
       name: "App Dev"
 
     android:
-      applicationId: "com.example.bt.app"
+      applicationId: "com.example.bt.app.dev"
       # icon: "assets/images/logo.png"
       firebase:
         config: "android/app/src/dev/google-services.json"
     ios:
-      bundleId: "com.example.bt.app"
+      bundleId: "com.example.bt.app.dev"
       # icon: "assets/ds_icons/daystarter_icon.png"
       firebase:
         config: "ios/Runner/dev/GoogleService-Info.plist"

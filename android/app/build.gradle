@@ -34,7 +34,7 @@ android {
     productFlavors {
         dev {
             dimension "flavor-type"
-            applicationId "com.example.bt.app"
+            applicationId "com.example.bt.app.dev"
             resValue "string", "app_name", "App Dev"
         }
         prod {
