@@ -13,9 +13,9 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 require 'json'
-require 'dotenv'
+# require 'dotenv'
 
-Dotenv.load '.env'
+# Dotenv.load '.env'
 
 # def load_firebase_config(env)
 #   config_file = File.read(File.join(__dir__, 'firebase_config.json'))
@@ -27,27 +27,26 @@ default_platform(:android)
 
 platform :android do
   lane :app_distribution do |options|
-    env = options[:env] || "dev"
+    env = options[:env] || "prod"
     
+    config = JSON.parse(File.read('firebase_config.json'))[env]
     fastlane_root = File.expand_path(".",__dir__)
-    app_id = ENV["FIREBASE_APP_ID_#{env.upcase}"]
-    groups_file = File.join(fastlane_root,ENV["FIREBASE_GROUPS_FILE_#{env.upcase}"])
-    service_credentials_file = File.join(fastlane_root,ENV["FIREBASE_SERVICE_CREDENTIALS_FILE_#{env.upcase}"])
-    release_notes_file = File.join(fastlane_root,ENV["FIREBASE_RELEASE_NOTES_FILE_#{env.upcase}"])
+
+    app_id = config['app_id']
+    groups_file = File.join(fastlane_root,config['groups_file'])
+    service_credentials_file = File.join(fastlane_root,config['service_credentials_file'])
+    release_notes_file = File.join(fastlane_root,config['release_notes_file'])
 
     puts "env: #{env}"
     puts "app_id: #{app_id}"
     puts "groups_file: #{groups_file}"
     puts "service_credentials_file: #{service_credentials_file}"
     puts "release_notes_file: #{release_notes_file}"
-
-    gradle(task: "clean")
-    gradle(task: "assemble", flavor: env, build_type: "Release")
     
-    # sh("fvm", "flutter", "clean")
+    sh("fvm", "flutter", "clean")
     # sh("fvm", "flutter", "packages", "get")
     # sh("fvm", "flutter", "pub", "run", "build_runner", "build", "--delete-conflicting-outputs")
-    # sh("fvm", "flutter", "build", "apk", "--flavor", "#{env}", "-t", "lib/main_#{env}.dart")
+    sh("fvm", "flutter", "build", "apk", "--flavor", "#{env}", "-t", "lib/main_#{env}.dart")
   
     # Define the root directory of the project
     root_dir = File.expand_path("../../", __dir__)
@@ -64,30 +63,6 @@ platform :android do
       service_credentials_file: service_credentials_file,
       release_notes_file: release_notes_file
     )
-    
-    # # output_path = File.join(__dir__, "build/app/outputs/apk/#{env}/release/")
-    # output_json_path = File.join(__dir__, "build/app/outputs/apk/#{env}/release/output-metadata.json")
-
-    # if File.exist?(output_json_path)
-    #   begin
-    #     # Read and parse the JSON file
-    #     file_content = File.read(output_json_path)
-    #     build_output = JSON.parse(file_content)
-        
-    #     elements = build_output["elements"][0]
-    #     apk_path = File.join(output_path, elements["outputFile"])
-    
-    #     firebase_app_distribution(
-    #       app: app_id,
-    #       groups_file: groups_file,
-    #       apk_path: apk_path,
-    #     )
-    #   rescue JSON::ParserError
-    #     UI.error("Failed to parse JSON file: #{output_json_path}")
-    #   end
-    # else
-    #   UI.error("File not found: #{output_json_path}")
-    # end
   end
 
   lane :app_distribution_dev do
@@ -102,19 +77,25 @@ platform :android do
     track = options[:track]
     puts "track in options: #{track}"
     if !options[:track]
-      track = "beta"
+      track = "internal"
     end
-    puts "env: #{track}"
+    puts "track: #{track}"
 
-    sh("fastlane", "supply", "init", "--json_key", "../../credentials/play-store.json", "--track", "#{track}")
+    env = options[:env]
+    if !env
+      env = "prod"
+    end
+    fastlane_root = File.expand_path(".",__dir__)
 
-    sh("flutter", "packages", "get")
-    sh("flutter", "clean")
-    sh("flutter", "build", "appbundle")
+    sh("fvm","flutter","clean")
+    # sh("fvm","flutter","packages", "get")
+    # sh("fvm","flutter","pub","run","build_runner","build","--delete-conflicting-outputs")
+    sh("fvm","flutter", "build", "appbundle", "--flavor", env, "--release", "-t", "lib/main_#{env}.dart")
 
+    aab_path = "../build/app/outputs/bundle/#{env}Release/app-#{env}-release.aab"
     upload_to_play_store(
       track: track,
-      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      aab: aab_path,
       skip_upload_images: true,
       skip_upload_screenshots: true,
       skip_upload_metadata: true,

@@ -23,7 +23,7 @@ flavors:
       firebase:
         config: "android/app/src/prod/google-services.json"
     ios:
-      bundleId: "com.example.bt.app.dev"
+      bundleId: "com.example.bt.app"
       # icon: "assets/ds_icons/daystarter_icon.png"
       firebase:
         config: "ios/Runner/prod/GoogleService-Info.plist"
