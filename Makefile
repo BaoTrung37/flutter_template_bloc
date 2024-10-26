@@ -1,7 +1,7 @@
 first_run:
-	fvm use 3.22.3
-	copy .\assets\env\.env.example .\assets\env\.env
-	copy .\assets\env\.env.example .\assets\env\.env.dev
+	fvm use 3.24.3
+	# copy .\assets\env\.env.example .\assets\env\.env
+	# copy .\assets\env\.env.example .\assets\env\.env.dev
 	make rebuild
 
 clean:
