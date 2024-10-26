@@ -17,6 +17,11 @@ fvm flutter pub get
 fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 fvm flutter gen-l10n
 ```
+### Firebase Config
+```
+https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/
+chmod +x ./flutterfire-config.sh
+```
 
 1. Make sure your computer and editor are ready for Flutter development          
 - https://docs.flutter.dev/get-started/editor              

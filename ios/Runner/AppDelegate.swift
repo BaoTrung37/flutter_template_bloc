@@ -1,6 +1,6 @@
-import UIKit
 import Flutter
 import flutter_local_notifications
+import UIKit
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
