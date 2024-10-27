@@ -4,7 +4,7 @@ import 'package:example_flutter_app/domain/repository/auth/auth_repository.dart'
 import 'package:example_flutter_app/presentation/utilities/logger/app_logger.dart';
 import 'package:injectable/injectable.dart';
 
-@LazySingleton(as: AuthRepository)
+@lazySingleton
 class AuthRepositoryImp implements AuthRepository {
   AuthRepositoryImp(this._restClient, this._sharedManager);
 
@@ -22,5 +22,16 @@ class AuthRepositoryImp implements AuthRepository {
       AppLogger.instance.logE(e.toString());
       throw Exception('Login failed');
     }
+  }
+
+  @override
+  Future<bool> isLogged() async {
+    return _sharedManager.getAccessToken() != null;
+  }
+
+  @override
+  Future<void> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
   }
 }
