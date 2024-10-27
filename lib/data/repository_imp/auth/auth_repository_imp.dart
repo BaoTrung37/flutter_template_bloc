@@ -31,7 +31,6 @@ class AuthRepositoryImp implements AuthRepository {
 
   @override
   Future<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+    return _sharedManager.removeAccessToken();
   }
 }
