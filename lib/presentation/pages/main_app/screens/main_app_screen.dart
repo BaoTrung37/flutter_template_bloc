@@ -15,12 +15,13 @@ class MainAppScreen extends StatefulWidget {
 }
 
 class _MainAppScreenState extends State<MainAppScreen> {
+  final _bottomTabCubit = getIt<BottomTabCubit>();
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<BottomTabCubit>(
-          create: (context) => getIt<BottomTabCubit>(),
+          create: (context) => _bottomTabCubit,
         ),
       ],
       child: AutoTabsRouter(
@@ -38,10 +39,13 @@ class _MainAppScreenState extends State<MainAppScreen> {
           return Scaffold(
             body: child,
             bottomNavigationBar: BlocListener<BottomTabCubit, int>(
+              bloc: _bottomTabCubit,
               listener: (context, state) {
                 tabsRouter.setActiveIndex(state);
               },
-              child: const MainBottomBar(),
+              child: MainBottomBar(
+                bottomTabCubit: _bottomTabCubit,
+              ),
             ),
           );
         },
