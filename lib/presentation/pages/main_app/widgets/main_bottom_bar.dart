@@ -1,6 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:example_flutter_app/config/color/app_colors.dart';
-import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/presentation/pages/main_app/cubit/bottom_tab_cubit.dart';
 import 'package:example_flutter_app/presentation/resources/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainBottomBar extends StatelessWidget {
-  const MainBottomBar({super.key});
-
+  const MainBottomBar({
+    required this.bottomTabCubit,
+    super.key,
+  });
+  final BottomTabCubit bottomTabCubit;
   @override
   Widget build(BuildContext context) {
     final tabs = <TabItem>[
@@ -28,6 +31,7 @@ class MainBottomBar extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         BlocBuilder<BottomTabCubit, int>(
+          bloc: bottomTabCubit,
           buildWhen: (previous, current) => previous != current,
           builder: (BuildContext context, int page) {
             return AnimatedBottomNavigationBar.builder(
@@ -44,7 +48,7 @@ class MainBottomBar extends StatelessWidget {
               leftCornerRadius: 20.r,
               rightCornerRadius: 20.r,
               onTap: (int index) {
-                getIt<BottomTabCubit>().changeTab(index);
+                bottomTabCubit.changeTab(index);
               },
               splashRadius: 0,
               safeAreaValues: const SafeAreaValues(bottom: false),
