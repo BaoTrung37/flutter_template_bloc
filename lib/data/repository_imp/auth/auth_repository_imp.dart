@@ -26,11 +26,21 @@ class AuthRepositoryImp implements AuthRepository {
 
   @override
   Future<bool> isLogged() async {
-    return _sharedManager.getAccessToken() != null;
+    return await _checkAccessToken() == true;
   }
 
   @override
   Future<void> logout() {
     return _sharedManager.removeAccessToken();
+  }
+
+  Future<bool> _checkAccessToken() async {
+    try {
+      await _restClient.getProfile();
+      return _sharedManager.getAccessToken() != null;
+    } catch (e) {
+      AppLogger.instance.logE(e.toString());
+      return false;
+    }
   }
 }

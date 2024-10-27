@@ -6,7 +6,6 @@ part 'user_response.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class UserResponse {
   UserResponse({
-    required this.username,
     required this.id,
     required this.password,
     required this.email,
@@ -17,8 +16,7 @@ class UserResponse {
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);
 
-  final String username;
-  final String id;
+  final int id;
   final String password;
   final String email;
   final String name;
