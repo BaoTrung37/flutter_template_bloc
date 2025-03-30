@@ -23,16 +23,16 @@ final colorsLight = AppColors(
   primaryColor: const Color(0xFF6200EE),
   secondaryColor: Colors.white,
   textPrimary: Colors.black,
-  textSecondary: Colors.black.withOpacity(0.6),
-  border: Colors.grey.withOpacity(0.6),
+  textSecondary: Colors.black.withValues(alpha: 0.6),
+  border: Colors.grey.withValues(alpha: 0.6),
 );
 
 final colorsDark = AppColors(
   primaryColor: const Color(0xFFBB86FC),
   secondaryColor: Colors.black,
   textPrimary: Colors.white,
-  textSecondary: Colors.white.withOpacity(0.6),
-  border: Colors.grey.withOpacity(0.6),
+  textSecondary: Colors.white.withValues(alpha: 0.6),
+  border: Colors.grey.withValues(alpha: 0.6),
 );
 
 extension AppColorsExtension on BuildContext {
@@ -43,8 +43,6 @@ extension AppColorsExtension on BuildContext {
         return colorsLight;
       case Brightness.dark:
         return colorsDark;
-      default:
-        return colorsLight;
     }
   }
 }

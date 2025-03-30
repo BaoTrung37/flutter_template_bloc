@@ -48,8 +48,6 @@ class AppConfig {
         return 'App Dev';
       case Flavor.prod:
         return 'App';
-      default:
-        return 'App';
     }
   }
 
@@ -59,8 +57,6 @@ class AppConfig {
         return EnvironmentAttribute.devApp();
       case Flavor.prod:
         return EnvironmentAttribute.prodApp();
-      default:
-        return EnvironmentAttribute.devApp();
     }
   }
 
@@ -70,8 +66,6 @@ class AppConfig {
         return dev.DefaultFirebaseOptions.currentPlatform;
       case Flavor.prod:
         return prod.DefaultFirebaseOptions.currentPlatform;
-      default:
-        return dev.DefaultFirebaseOptions.currentPlatform;
     }
   }
 
