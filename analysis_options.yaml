@@ -38,6 +38,7 @@ analyzer:
     prefer_function_declarations_over_variables: error
     avoid_positional_boolean_parameters: error
     always_specify_types: ignore
+    invalid_annotation_target: ignore
 
   strong-mode:
     implicit-casts: true
