@@ -218,8 +218,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
+				080236C9C060721D26A298C0 /* Firebase Setup */,
 				1B28780119B7EE22B31B9FC0 /* [CP] Check Pods Manifest.lock */,
-				05D34286B7D7919CF5DF9A58 /* Firebase Setup */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
@@ -309,7 +309,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05D34286B7D7919CF5DF9A58 /* Firebase Setup */ = {
+		080236C9C060721D26A298C0 /* Firebase Setup */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -920,6 +920,30 @@
 			};
 			name = Profile;
 		};
+		526D39F9ABCAE9AC4CFF773D /* Release-prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1F297A6A2D36CB3E06D7862 /* prodRelease.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Release-prod";
+		};
+		7300528555D25C6091A2B607 /* Profile-dev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E633C09656392C615D84C896 /* devProfile.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Profile-dev";
+		};
+		7444B45DBF11DD7A51FE4F5C /* Profile-prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1A8B0C62B7D800FD98FDD78 /* prodProfile.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Profile-prod";
+		};
 		7B9FA94ABC9DC53AC45F6748 /* Release-prod */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B1F297A6A2D36CB3E06D7862 /* prodRelease.xcconfig */;
@@ -1148,6 +1172,30 @@
 			};
 			name = Release;
 		};
+		A4B7A3F3C852369BF316109B /* Debug-dev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11C82715B0E152B59BC7C43B /* devDebug.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Debug-dev";
+		};
+		C275FEE5991700FF74D9A202 /* Debug-prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B70811DFF9E3EED9292C02D7 /* prodDebug.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Debug-prod";
+		};
+		C5C462E32A836CB9EFB4272A /* Release-dev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C29095D29134D28F77960110 /* devRelease.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Release-dev";
+		};
 		DD64478403234BD831F780DE /* Release-dev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C29095D29134D28F77960110 /* devRelease.xcconfig */;
@@ -1255,6 +1303,12 @@
 				97C147061CF9000F007C117D /* Debug */,
 				97C147071CF9000F007C117D /* Release */,
 				249021D4217E4FDB00AE95B9 /* Profile */,
+				A4B7A3F3C852369BF316109B /* Debug-dev */,
+				7300528555D25C6091A2B607 /* Profile-dev */,
+				C5C462E32A836CB9EFB4272A /* Release-dev */,
+				C275FEE5991700FF74D9A202 /* Debug-prod */,
+				7444B45DBF11DD7A51FE4F5C /* Profile-prod */,
+				526D39F9ABCAE9AC4CFF773D /* Release-prod */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
