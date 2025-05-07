@@ -1,0 +1,211 @@
+name: Distribute to App Store
+
+on:
+  push:
+    tags:
+      - release*
+      - ios-release*
+
+jobs:
+  build-ios:
+    name: Build and Deploy iOS
+    permissions: write-all
+    runs-on: macos-latest
+    steps:
+      - name: Clone repository
+        id: clone_repo
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        id: setup_flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.27.1
+          channel: stable
+
+      - name: Select Xcode version
+        id: setup_xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.1'
+          
+      - name: 🐦 Setup Shorebird
+        id: setup_shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+
+      - name: Install dependencies
+        id: install_deps
+        run: |
+          flutter clean
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+          flutter gen-l10n --no-nullable-getter
+
+      - name: Install CocoaPods and configure project
+        id: install_pods
+        working-directory: ios
+        run: |
+          pod deintegrate
+          pod cache clean --all
+          pod install
+
+      # Install Apple Certificate
+      # Create certificate and provisioning profile for iOS so XCodeBuild can build
+      - name: Install the Apple certificate and provisioning profile
+        id: install_apple_cert
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.APPLE_PROVISIONING_PROFILE_BASE64 }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
+
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+
+          # Set this keychain as the default for the session
+          security list-keychains -d user -s $KEYCHAIN_PATH $(security list-keychains -d user | sed s/\"//g)
+          security default-keychain -s $KEYCHAIN_PATH
+
+          # Set key partition list (required for Xcode 14+)
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+  
+          # Debug: List installed certificates
+          security find-identity -v -p codesigning
+
+      # Modify the iOS build step to specify code signing options
+      - name: Build iOS IPA
+        id: build_ipa
+        run: |
+          export SHOREBIRD_TOKEN="${{ secrets.SHOREBIRD_TOKEN }}"
+          shorebird release --platforms=ios --flavor=prod --dart-define=BASE_API_URL=https://api.wisehomie.com/v1 --dart-define=BASE_API_URL_V2=https://api.wisehomie.com/v2 --export-options-plist=ios/ExportOptions.plist --flutter-version=3.27.1
+          
+      - name: Clean up keychain and provisioning profile
+        if: ${{ always() }}
+        run: |
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+      # Install private key .p8 into the machine so Xcode can recognize it
+      - name: Install private API key P8
+        env:
+          APPSTORE_KEY_P8_BASE64: ${{ secrets.APPSTORE_KEY_P8_BASE64 }}
+          APPSTORE_APIKEY: ${{ secrets.APPSTORE_APIKEY }}
+        run: |
+          mkdir -p ~/private_keys
+          echo -n "$APPSTORE_KEY_P8_BASE64" | base64 --decode > ~/private_keys/AuthKey_$APPSTORE_APIKEY.p8
+      
+      - name: Upload to AppStore
+        id: upload_app_store
+        env:      
+          APPSTORE_APIKEY: ${{ secrets.APPSTORE_APIKEY }} # obtained from appstore connect -> users and access -> keys -> create key
+          APPSTORE_APIISSUER: ${{ secrets.APPSTORE_APIISSUER }} # obtained from appstore connect -> users and access -> keys -> create key
+          # when running this command, the file AuthKey_$APPSTORE_APIKEY.p8 must have been loaded into private_keys beforehand
+        run: |
+          xcrun altool --upload-app --type ios -f ./build/ios/ipa/Wisehomie.ipa --apiKey $APPSTORE_APIKEY --apiIssuer $APPSTORE_APIISSUER
+      - name: Notify Slack on Success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              "attachments": [
+                {
+                  "color": "good",
+                  "title": "[IOS] - [Wisehomie Production] ✅ Deploy to App Store Successful",
+                  "text": "The app has been successfully deployed to the App Store.",
+                  "fields": [
+                    {
+                      "title": "Repository",
+                      "value": "${{ github.repository }}",
+                      "short": true
+                    },
+                    {
+                      "title": "Commit",
+                      "value": "${{ github.event.head_commit.message }}",
+                      "short": false
+                    }
+                  ],
+                  "footer": "GitHub Actions",
+                  "footer_icon": "https://github.githubassets.com/favicon.ico",
+                  "ts": "${{ github.event.repository.updated_at }}"
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              "attachments": [
+                {
+                  "color": "good",
+                  "title": "[IOS] - [Wisehomie Production] ❌ Deploy to App Store Failed",
+                  "text": "An error occurred while deploying the app to the App Store. \n ",
+                  "footer": "GitHub Actions",
+                  "footer_icon": "https://github.githubassets.com/favicon.ico",
+                  "ts": "${{ github.event.repository.updated_at }}"
+                },
+                {
+                  "color": "good",
+                  "title": "Commit",
+                  "text": "${{ github.event.head_commit.message }} \n"
+                },
+                {
+                  "color": "${{ steps.clone_repo.outcome == 'success' && 'good' || steps.clone_repo.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Clone Repo Step",
+                  "text": "${{ steps.clone_repo.outcome }}"
+                },
+                {
+                  "color": "${{ steps.install_deps.outcome == 'success' && 'good' || steps.install_deps.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Install Dependencies Step",
+                  "text": "${{ steps.install_deps.outcome }}"
+                },
+                {
+                  "color": "${{ steps.install_pods.outcome == 'success' && 'good' || steps.install_pods.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Install CocoaPods Step",
+                  "text": "${{ steps.install_pods.outcome }}"
+                },
+                {
+                  "color": "${{ steps.install_apple_cert.outcome == 'success' && 'good' || steps.install_apple_cert.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Install Apple Certificate Step",
+                  "text": "${{ steps.install_apple_cert.outcome }}"
+                },
+                {
+                  "color": "${{ steps.build_ipa.outcome == 'success' && 'good' || steps.build_ipa.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Build IPA Step",
+                  "text": "${{ steps.build_ipa.outcome }}"
+                },
+                {
+                  "color": "${{ steps.upload_app_store.outcome == 'success' && 'good' || steps.upload_app_store.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Upload to App Store Connect",
+                  "text": "${{ steps.upload_app_store.outcome }}"
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
