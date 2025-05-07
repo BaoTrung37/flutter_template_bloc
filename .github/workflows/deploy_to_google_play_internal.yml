@@ -1,0 +1,158 @@
+name: Deploy to Google Play [Internal Test]
+
+on:
+  push:
+    tags:
+      - dev*
+      - android-dev*
+
+jobs:
+  build-android-internal:
+    name: Build and Deploy Android App (Internal Test)
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        id: clone_repo
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        id: setup_flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.27.1
+
+      - name: 🐦 Setup Shorebird
+        id: setup_shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+
+      - name: Flutter version
+        id: flutter_version
+        run: flutter --version
+
+      - name: Install dependencies
+        id: install_deps
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+          flutter gen-l10n --no-nullable-getter
+
+      - name: Decode keystore
+        id: decode_keystore
+        run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/wisehomie_upload_keystore.jks
+
+      - name: Create key.properties
+        id: create_key_properties
+        run: |
+          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
+          echo "storeFile=wisehomie_upload_keystore.jks" >> android/key.properties
+
+      - name: Build AAB
+        id: build_aab
+        run: |
+          export SHOREBIRD_TOKEN="${{ secrets.SHOREBIRD_TOKEN }}"
+          shorebird release --platforms=android --flavor=dev --dart-define=BASE_API_URL=https://dev.api.wisehomie.com/v1 --dart-define=BASE_API_URL_V2=https://dev.api.wisehomie.com/v2 --flutter-version=3.27.1
+
+      - name: Decode Google Play JSON
+        id: decode_google_play_json
+        run: echo "${{ secrets.PLAY_STORE_JSON }}" | base64 --decode > google_play.json
+
+      - name: Upload to Play Store (Internal)
+        id: upload_play_store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: google_play.json
+          packageName: com.wisehomie.app.testing
+          releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab
+          track: internal 
+          status: draft
+
+      - name: Notify Slack on Success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              "attachments": [
+                {
+                  "color": "good",
+                  "title": "[Android] - [Wisehomie Dev] ✅ Deploy to Google Play Internal Successful",
+                  "text": "The app has been successfully deployed to the Google Play Internal track.",
+                  "fields": [
+                    {
+                      "title": "Repository",
+                      "value": "${{ github.repository }}",
+                      "short": true
+                    },
+                     {
+                      "title": "Commit",
+                      "value": "${{ github.event.head_commit.message }}",
+                      "short": false
+                    }
+                  ],
+                  "footer": "GitHub Actions",
+                  "footer_icon": "https://github.githubassets.com/favicon.ico",
+                  "ts": "${{ github.event.repository.updated_at }}"
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              "attachments": [
+                 {
+                  "color": "good",
+                  "title": "[Android] - [Wisehomie Dev] ❌ Deploy to Google Play Internal Failed",
+                  "text": "An error occurred while deploying the app to the Google Play Internal track. \n ",
+                  "footer": "GitHub Actions",
+                  "footer_icon": "https://github.githubassets.com/favicon.ico",
+                  "ts": "${{ github.event.repository.updated_at }}"
+                },
+                {
+                  "color": "good",
+                  "title": "Commit",
+                  "text": "${{ github.event.head_commit.message }} \n"
+                },
+                {
+                  "color": "${{ steps.clone_repo.outcome == 'success' && 'good' || steps.clone_repo.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Clone Repo Step",
+                  "text": "${{ steps.clone_repo.outcome }}"
+                },
+                {
+                  "color": "${{ steps.install_deps.outcome == 'success' && 'good' || steps.install_deps.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Install Dependencies Step",
+                  "text": "${{ steps.install_deps.outcome }}"
+                },
+                {
+                  "color": "${{ steps.build_aab.outcome == 'success' && 'good' || steps.build_aab.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Build AAB Step",
+                  "text": "${{ steps.build_aab.outcome }}"
+                },
+                {
+                  "color": "${{ steps.decode_google_play_json.outcome == 'success' && 'good' || steps.decode_google_play_json.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Decode Google Play JSON Step",
+                  "text": "${{ steps.decode_google_play_json.outcome }}"
+                },
+                {
+                  "color": "${{ steps.upload_play_store.outcome == 'success' && 'good' || steps.upload_play_store.outcome == 'skipped' && 'warning' || 'danger' }}",
+                  "title": "Upload to Play Store Step",
+                  "text": "${{ steps.upload_play_store.outcome }}"
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
