@@ -8,7 +8,6 @@ import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/presentation/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -23,6 +22,7 @@ FutureOr<void> mainApp(Flavor flavor) async {
   Future<void> startApp() async {
     WidgetsFlutterBinding.ensureInitialized();
     HttpOverrides.global = MyHttpOverrides();
+
     final appConfig = AppConfig(
       flavor: flavor,
     );
@@ -32,21 +32,20 @@ FutureOr<void> mainApp(Flavor flavor) async {
     Bloc.observer = MyBlocObserver();
 
     await configureDependencies(appConfig);
-
     await getIt.allReady();
 
     runApp(const App());
 
-    EasyLoading.instance
-      ..backgroundColor = Colors.transparent
-      ..boxShadow = <BoxShadow>[]
-      ..indicatorColor = Colors.grey
-      ..indicatorType = EasyLoadingIndicatorType.circle
-      ..indicatorSize = 40
-      ..maskType = EasyLoadingMaskType.black
-      ..textColor = Colors.grey
-      ..progressColor = Colors.grey
-      ..loadingStyle = EasyLoadingStyle.custom;
+    // EasyLoading.instance
+    //   ..backgroundColor = Colors.transparent
+    //   ..boxShadow = <BoxShadow>[]
+    //   ..indicatorColor = Colors.grey
+    //   ..indicatorType = EasyLoadingIndicatorType.circle
+    //   ..indicatorSize = 40
+    //   ..maskType = EasyLoadingMaskType.black
+    //   ..textColor = Colors.grey
+    //   ..progressColor = Colors.grey
+    //   ..loadingStyle = EasyLoadingStyle.custom;
   }
 
   await runZonedGuarded(() async {

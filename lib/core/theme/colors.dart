@@ -1,7 +1,41 @@
 import 'package:flutter/material.dart';
 
+/// Color constants for the Nike theme
+class NikeColorConstants {
+  static const Color primary = Color(0xFF006FFD);
+  static const Color grey1Dark = Color(0xFFB0B0B0);
+  static const Color grey2Dark = Color(0xFF2E2E2E);
+  static const Color grey3Dark = Color(0xFF4A4A4A);
+  static const Color blackDark = Color(0xFFE0E0E0);
+  static const Color whiteDark = Color(0xFF1A1A1A);
+  static const Color greyDark = Color(0xFF9E9E9E);
+  static const Color grey5Dark = Color(0xFF3A3A3A);
+  static const Color greenDark = Color(0xFF00E676);
+  static const Color greenSupportDark = Color(0xFF1B5E20);
+  static const Color greenSupport2Dark = Color(0xFFD5F6D6);
+  static const Color redSupportDark = Color(0xFFB71C1C);
+  static const Color redSupport2Dark = Color(0xFFFFDCDC);
+  static const Color redDark = Color(0xFFFF8A80);
+  static const Color blueDark = Color(0xFF0D47A1);
+
+  static const Color grey1Light = Color(0xFF71727A);
+  static const Color grey2Light = Color(0xFFF5F5F5);
+  static const Color grey3Light = Color(0xFFC5C6CC);
+  static const Color blackLight = Color(0xFF13132D);
+  static const Color whiteLight = Color(0xFFFFFFFF);
+  static const Color greyLight = Color(0xFF5F5B5B);
+  static const Color grey5Light = Color(0xFFEBEBEB);
+  static const Color greenLight = Color(0xff2CD232);
+  static const Color greenSupportLight = Color(0xff2CD232);
+  static const Color greenSupport2Light = Color(0xFFD5F6D6);
+  static const Color redSupportLight = Color(0xffFF616D);
+  static const Color redSupport2Light = Color(0xFFFFDCDC);
+  static const Color redLight = Color(0xffFF616D);
+  static const Color blueLight = Color(0xffEFF3FF);
+}
+
 class NikeColors extends ThemeExtension<NikeColors> {
-  NikeColors({
+  const NikeColors({
     required this.primary,
     required this.grey1,
     required this.grey2,
@@ -19,40 +53,40 @@ class NikeColors extends ThemeExtension<NikeColors> {
     required this.blue,
   });
 
-  factory NikeColors.dark() => NikeColors(
-        primary: const Color(0xFF006FFD),
-        grey1: const Color(0xFFB0B0B0),
-        grey2: const Color(0xFF2E2E2E),
-        grey3: const Color(0xFF4A4A4A),
-        black: const Color(0xFFE0E0E0),
-        white: const Color(0xFF1A1A1A),
-        grey: const Color(0xFF9E9E9E),
-        grey5: const Color(0xFF3A3A3A),
-        green: const Color(0xFF00E676),
-        greenSupport: const Color(0xFF1B5E20),
-        greenSupport2: const Color(0xFFD5F6D6),
-        redSupport: const Color(0xFFB71C1C),
-        redSupport2: const Color(0xFFFFDCDC),
-        red: const Color(0xFFFF8A80),
-        blue: const Color(0xFF0D47A1),
+  factory NikeColors.dark() => const NikeColors(
+        primary: NikeColorConstants.primary,
+        grey1: NikeColorConstants.grey1Dark,
+        grey2: NikeColorConstants.grey2Dark,
+        grey3: NikeColorConstants.grey3Dark,
+        black: NikeColorConstants.blackDark,
+        white: NikeColorConstants.whiteDark,
+        grey: NikeColorConstants.greyDark,
+        grey5: NikeColorConstants.grey5Dark,
+        green: NikeColorConstants.greenDark,
+        greenSupport: NikeColorConstants.greenSupportDark,
+        greenSupport2: NikeColorConstants.greenSupport2Dark,
+        redSupport: NikeColorConstants.redSupportDark,
+        redSupport2: NikeColorConstants.redSupport2Dark,
+        red: NikeColorConstants.redDark,
+        blue: NikeColorConstants.blueDark,
       );
 
-  factory NikeColors.light() => NikeColors(
-        primary: const Color(0xFF006FFD),
-        grey1: const Color(0xFF71727A),
-        grey2: const Color(0xFFF5F5F5),
-        grey3: const Color(0xFFC5C6CC),
-        black: const Color(0xFF13132D),
-        white: const Color(0xFFFFFFFF),
-        grey: const Color(0xFF5F5B5B),
-        grey5: const Color(0xFFEBEBEB),
-        green: const Color(0xff2CD232),
-        greenSupport: const Color(0xff2CD232),
-        greenSupport2: const Color(0xFFD5F6D6),
-        redSupport: const Color(0xffFF616D),
-        redSupport2: const Color(0xFFFFDCDC),
-        red: const Color(0xffFF616D),
-        blue: const Color(0xffEFF3FF),
+  factory NikeColors.light() => const NikeColors(
+        primary: NikeColorConstants.primary,
+        grey1: NikeColorConstants.grey1Light,
+        grey2: NikeColorConstants.grey2Light,
+        grey3: NikeColorConstants.grey3Light,
+        black: NikeColorConstants.blackLight,
+        white: NikeColorConstants.whiteLight,
+        grey: NikeColorConstants.greyLight,
+        grey5: NikeColorConstants.grey5Light,
+        green: NikeColorConstants.greenLight,
+        greenSupport: NikeColorConstants.greenSupportLight,
+        greenSupport2: NikeColorConstants.greenSupport2Light,
+        redSupport: NikeColorConstants.redSupportLight,
+        redSupport2: NikeColorConstants.redSupport2Light,
+        red: NikeColorConstants.redLight,
+        blue: NikeColorConstants.blueLight,
       );
 
   final Color primary;

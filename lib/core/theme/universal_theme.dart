@@ -18,7 +18,7 @@ class UniversalThemeFactory extends NikeThemeDataFactory {
       colors: colors,
       defaultTextTheme: defaultTextStyle,
       materialTheme: ThemeData(
-        fontFamily: 'Inter',
+        fontFamily: 'Inter', // *change to your font family
         colorScheme: ColorScheme.fromSeed(seedColor: colors.primary).copyWith(
           surface: colors.white,
           onSurface: colors.black,

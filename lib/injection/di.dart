@@ -13,7 +13,6 @@ final getIt = GetIt.instance;
 )
 Future<void> configureDependencies(AppConfig appConfig) async {
   await getIt.init();
-  getIt.registerLazySingleton<AppConfig>(() => appConfig);
   getIt.registerLazySingleton<Dio>(
     () => DioHelper.configApiDio(appConfig),
   );
