@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:example_flutter_app/config/color/app_colors.dart';
+import 'package:example_flutter_app/core/color/app_colors.dart';
 import 'package:example_flutter_app/presentation/pages/main_app/cubit/bottom_tab_cubit.dart';
 import 'package:example_flutter_app/presentation/resources/app_text_styles.dart';
 import 'package:flutter/material.dart';

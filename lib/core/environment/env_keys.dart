@@ -1,4 +1,4 @@
-import 'package:example_flutter_app/config/app_config.dart';
+import 'package:example_flutter_app/core/app_config.dart';
 import 'package:example_flutter_app/gen/assets.gen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

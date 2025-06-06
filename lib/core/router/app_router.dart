@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:example_flutter_app/config/router/navigation.dart';
+import 'package:example_flutter_app/core/router/navigation.dart';
 import 'package:example_flutter_app/presentation/presentation.dart';
 
 part 'app_router.gr.dart';

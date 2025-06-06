@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:example_flutter_app/config/services/notification/notification_channel.dart';
-import 'package:example_flutter_app/config/services/notification/notification_group.dart';
+import 'package:example_flutter_app/core/services/notification/notification_channel.dart';
+import 'package:example_flutter_app/core/services/notification/notification_group.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {

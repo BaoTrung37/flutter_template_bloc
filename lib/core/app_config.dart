@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:example_flutter_app/config/firebase/firebase_options_dev.dart'
+import 'package:example_flutter_app/core/firebase/firebase_options_dev.dart'
     as dev;
-import 'package:example_flutter_app/config/firebase/firebase_options_prod.dart'
+import 'package:example_flutter_app/core/firebase/firebase_options_prod.dart'
     as prod;
 import 'package:example_flutter_app/data/data.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';

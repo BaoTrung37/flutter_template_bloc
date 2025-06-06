@@ -1,4 +1,4 @@
-import 'package:example_flutter_app/config/services/local_service/shared_manager.dart';
+import 'package:example_flutter_app/core/services/local_service/shared_manager.dart';
 import 'package:example_flutter_app/domain/use_cases/base/use_case.dart';
 import 'package:injectable/injectable.dart';
 

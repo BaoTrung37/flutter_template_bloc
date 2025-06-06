@@ -1,4 +1,4 @@
-import 'package:example_flutter_app/config/utilities/enums/common/languages.dart';
+import 'package:example_flutter_app/core/utilities/enums/common/languages.dart';
 import 'package:example_flutter_app/data/data.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';

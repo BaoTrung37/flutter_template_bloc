@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:example_flutter_app/config/app_config.dart';
-import 'package:example_flutter_app/config/bloc_observer/bloc_observer.dart';
-import 'package:example_flutter_app/config/environment/env_keys.dart';
+import 'package:example_flutter_app/core/app_config.dart';
+import 'package:example_flutter_app/core/bloc_observer/bloc_observer.dart';
+import 'package:example_flutter_app/core/environment/env_keys.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/presentation/app/app.dart';
 import 'package:flutter/material.dart';
