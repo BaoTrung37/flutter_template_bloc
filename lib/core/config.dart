@@ -1,2 +1,2 @@
 export 'app_config.dart';
-export 'bloc_observer/bloc_observer.dart';
+export 'infrastructure/bloc_observer/bloc_observer.dart';

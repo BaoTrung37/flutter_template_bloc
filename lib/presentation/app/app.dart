@@ -1,7 +1,10 @@
 import 'package:example_flutter_app/core/app_config.dart';
-import 'package:example_flutter_app/core/constants/app_constants.dart';
 import 'package:example_flutter_app/core/router/app_router.dart';
-import 'package:example_flutter_app/core/theme/app_theme.dart';
+import 'package:example_flutter_app/core/theme/colors.dart';
+import 'package:example_flutter_app/core/theme/providers/theme_provider.dart';
+import 'package:example_flutter_app/core/theme/texts.dart';
+import 'package:example_flutter_app/core/theme/universal_theme.dart';
+import 'package:example_flutter_app/core/utilities/constants/app_constants.dart';
 import 'package:example_flutter_app/core/utilities/enums/common/languages.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/l10n/app_localizations.dart';
@@ -49,25 +52,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<AppCubit>(
       create: (contExt) => getIt<AppCubit>(),
-      child: BlocBuilder<AppCubit, AppState>(
-        buildWhen: (previous, current) =>
-            previous.currentLanguage != current.currentLanguage,
-        builder: (context, state) {
-          return MaterialApp.router(
-            title: getIt<AppConfig>().title,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            theme: getThemeData(Brightness.light),
-            locale: state.currentLanguage.locate,
-            supportedLocales: AppLocalizations.supportedLocales,
-            routerConfig: getIt<AppRouter>().config(),
-            builder: EasyLoading.init(),
-          );
-        },
+      child: ThemeProvider(
+        notifier: AppTheme.uniform(
+          themeFactory: const UniversalThemeFactory(),
+          lightColors: NikeColors.light(),
+          darkColors: NikeColors.dark(),
+          defaultMode: ThemeMode.light,
+          textTheme: NikeTextTheme.build(),
+        ),
+        child: BlocBuilder<AppCubit, AppState>(
+          buildWhen: (previous, current) =>
+              previous.currentLanguage != current.currentLanguage,
+          builder: (context, state) {
+            return MaterialApp.router(
+              title: getIt<AppConfig>().title,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              theme: ThemeProvider.of(context).light,
+              darkTheme: ThemeProvider.of(context).dark,
+              themeMode: ThemeProvider.of(context).mode,
+              locale: state.currentLanguage.locate,
+              supportedLocales: AppLocalizations.supportedLocales,
+              routerConfig: getIt<AppRouter>().config(),
+              builder: EasyLoading.init(),
+            );
+          },
+        ),
       ),
     );
   }
