@@ -1,6 +1,5 @@
+import 'package:example_flutter_app/config/utilities/enums/common/languages.dart';
 import 'package:example_flutter_app/data/data.dart';
-import 'package:example_flutter_app/presentation/utilities/enums/common/languages.dart';
-import 'package:example_flutter_app/presentation/utilities/logger/app_logger.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +14,6 @@ class SharedManager {
       SharedKeys.firstTimeLaunch.name,
       false,
     );
-    AppLogger.instance.logD('First time launch saved');
   }
 
   bool getFirstTimeLaunch() {
@@ -24,7 +22,6 @@ class SharedManager {
 
   Future<void> removeFirstTimeLaunch() async {
     await _sharedPreferences.remove(SharedKeys.firstTimeLaunch.name);
-    AppLogger.instance.logD('First time launch removed');
   }
 
   //* Language Code
@@ -33,7 +30,6 @@ class SharedManager {
       SharedKeys.languageCode.name,
       languageCode,
     );
-    AppLogger.instance.logD('Language code saved: $languageCode');
   }
 
   String getLanguageCode() {
@@ -43,7 +39,6 @@ class SharedManager {
 
   Future<void> removeLanguageCode() async {
     await _sharedPreferences.remove(SharedKeys.languageCode.name);
-    AppLogger.instance.logD('Language code removed');
   }
 
   //* Access Token
@@ -52,7 +47,6 @@ class SharedManager {
       SharedKeys.accessToken.name,
       accessToken,
     );
-    AppLogger.instance.logD('Access token saved');
   }
 
   String getAccessToken() {
@@ -61,6 +55,5 @@ class SharedManager {
 
   Future<void> removeAccessToken() async {
     await _sharedPreferences.remove(SharedKeys.accessToken.name);
-    AppLogger.instance.logD('Access token removed');
   }
 }

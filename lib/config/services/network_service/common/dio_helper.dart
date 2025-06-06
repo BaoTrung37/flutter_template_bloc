@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:example_flutter_app/config/app_config.dart';
-import 'package:example_flutter_app/data/services/network_service/interceptors/auth_interceptor.dart';
-import 'package:example_flutter_app/data/services/network_service/interceptors/common_header_interceptor.dart';
+import 'package:example_flutter_app/config/services/network_service/interceptors/auth_interceptor.dart';
+import 'package:example_flutter_app/config/services/network_service/interceptors/common_header_interceptor.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 

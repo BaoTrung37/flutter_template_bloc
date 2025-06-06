@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:example_flutter_app/presentation/navigation/navigation_pages/navigation_pages.dart';
-import 'package:example_flutter_app/presentation/pages/pages.dart';
+import 'package:example_flutter_app/config/router/navigation.dart';
+import 'package:example_flutter_app/presentation/presentation.dart';
 
 part 'app_router.gr.dart';
 

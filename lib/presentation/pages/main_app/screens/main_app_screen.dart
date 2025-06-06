@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:example_flutter_app/config/router/app_router.dart';
 import 'package:example_flutter_app/injection/di.dart';
-import 'package:example_flutter_app/presentation/navigation/app_router.dart';
 import 'package:example_flutter_app/presentation/pages/main_app/cubit/bottom_tab_cubit.dart';
 import 'package:example_flutter_app/presentation/pages/main_app/widgets/main_bottom_bar.dart';
 import 'package:flutter/material.dart';
