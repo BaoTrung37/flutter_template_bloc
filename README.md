@@ -1,5 +1,5 @@
 # Template Flutter Project                   
-Flutter SDK = 3.22.3                             
+Flutter SDK = 3.27.2                         
 # Set up for Development   
 
 ### Git clone app
