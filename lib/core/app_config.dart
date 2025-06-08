@@ -1,13 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:example_flutter_app/core/infrastructure/bloc_observer/bloc_observer.dart';
+import 'package:example_flutter_app/core/infrastructure/environment/env_keys.dart';
 import 'package:example_flutter_app/core/infrastructure/firebase/firebase_options_dev.dart'
     as dev;
 import 'package:example_flutter_app/core/infrastructure/firebase/firebase_options_prod.dart'
     as prod;
 import 'package:example_flutter_app/data/data.dart';
+import 'package:example_flutter_app/injection/di.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 enum Flavor {
   dev,
@@ -16,12 +21,16 @@ enum Flavor {
 
 class AppConfig {
   final Flavor flavor;
-  AppConfig({
-    required this.flavor,
-  });
+  AppConfig({required this.flavor});
 
-  Future<void> init() async {
-    await _initFirebase();
+  Future<void> initialize() async {
+    await _initDependencies();
+    await Future.wait([
+      _initFirebase(),
+      _initEnvKeys(),
+      _initBloc(),
+      _initHydratedBloc(),
+    ]);
   }
 
   Future<void> _initFirebase() async {
@@ -40,6 +49,27 @@ class AppConfig {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+  }
+
+  Future<void> _initEnvKeys() async {
+    await EnvKeys.loadEnv(flavor);
+  }
+
+  Future<void> _initBloc() async {
+    Bloc.observer = MyBlocObserver();
+  }
+
+  Future<void> _initHydratedBloc() async {
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: kIsWeb
+          ? HydratedStorageDirectory.web
+          : HydratedStorageDirectory((await getTemporaryDirectory()).path),
+    );
+  }
+
+  Future<void> _initDependencies() async {
+    await configureDependencies(this);
+    await getIt.allReady();
   }
 
   String get title {

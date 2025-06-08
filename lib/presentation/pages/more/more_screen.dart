@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:example_flutter_app/core/application/language/language_bloc.dart';
 import 'package:example_flutter_app/core/utilities/enums/common/languages.dart';
 import 'package:example_flutter_app/injection/di.dart';
-import 'package:example_flutter_app/presentation/app/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,8 +19,8 @@ class MoreScreen extends StatelessWidget {
         child: Column(
           children: [
             const Text('More Screen'),
-            BlocBuilder<AppCubit, AppState>(
-              bloc: getIt<AppCubit>()..init(),
+            BlocBuilder<LanguageBloc, LanguageState>(
+              bloc: getIt<LanguageBloc>(),
               builder: (context, state) {
                 return DropdownButton<Languages>(
                   items: Languages.values
@@ -31,9 +31,10 @@ class MoreScreen extends StatelessWidget {
                         ),
                       )
                       .toList(),
-                  value: state.currentLanguage,
+                  value: state.language,
                   onChanged: (value) {
-                    getIt<AppCubit>().changeLanguage(value!);
+                    getIt<LanguageBloc>()
+                        .add(LanguageEvent.changeTempLanguage(value!));
                   },
                 );
               },
