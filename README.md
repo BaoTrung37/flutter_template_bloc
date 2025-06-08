@@ -10,7 +10,7 @@ make first_run
 ```
 otherwise
 ```sh
-fvm use 3.22.3
+fvm use 3.27.2 
 cp ./assets/env/.env.example ./assets/env/.env
 cp ./assets/env/.env.example ./assets/env/.env.dev
 fvm flutter pub get     
