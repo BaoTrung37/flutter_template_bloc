@@ -1,59 +1,52 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:example_flutter_app/config/app_config.dart';
-import 'package:example_flutter_app/config/bloc_observer/bloc_observer.dart';
-import 'package:example_flutter_app/config/environment/env_keys.dart';
-import 'package:example_flutter_app/injection/di.dart';
+import 'package:catcher_2/catcher_2.dart';
+import 'package:example_flutter_app/core/app_config.dart';
 import 'package:example_flutter_app/presentation/app/app.dart';
-import 'package:example_flutter_app/presentation/utilities/logger/app_logger.dart';
-import 'package:example_flutter_app/presentation/utilities/services/notification/notification_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-FutureOr<void> mainApp(Flavor flavor) async {
-  //
-  Future<void> startApp() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    final appConfig = AppConfig(
-      flavor: flavor,
-    );
-    AppLogger.instance.init();
-
-    await EnvKeys.loadEnv(flavor);
-
-    Bloc.observer = MyBlocObserver();
-
-    await configureDependencies(appConfig);
-
-    await getIt.allReady();
-
-    await NotificationService.instance.initialize(
-      onDidReceiveLocalNotification: (id, title, body, payload) async {
-        AppLogger.instance.logD(
-            'onDidReceiveLocalNotification: $id, $title, $body, $payload');
-      },
-      onDidReceiveNotificationResponse: (response) async {
-        AppLogger.instance.logD('onDidReceiveNotificationResponse: $response');
-      },
-    );
-    runApp(const App());
-
-    EasyLoading.instance
-      ..backgroundColor = Colors.transparent
-      ..boxShadow = <BoxShadow>[]
-      ..indicatorColor = Colors.grey
-      ..indicatorType = EasyLoadingIndicatorType.circle
-      ..indicatorSize = 40
-      ..maskType = EasyLoadingMaskType.black
-      ..textColor = Colors.grey
-      ..progressColor = Colors.grey
-      ..loadingStyle = EasyLoadingStyle.custom;
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
+}
 
-  await runZonedGuarded(() async {
-    await startApp();
-  }, (Object error, StackTrace stackTrace) {
-    AppLogger.instance.logD('runZonedGuarded Error: $error');
+Future<void> main() async {
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  HttpOverrides.global = MyHttpOverrides();
+
+  final appConfig = AppConfig();
+  await appConfig.initialize();
+
+  final debugOptions = Catcher2Options(SilentReportMode(), [
+    ToastHandler(
+      customMessage: 'An error occurred. Please try again!',
+      textSize: 14,
+    ),
+    ConsoleHandler(),
+    // CrashlyticsHandler(),
+  ]);
+  final releaseOptions = Catcher2Options(SilentReportMode(), [
+    // CrashlyticsHandler(),
+  ]);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((_) {
+    Catcher2(
+      rootWidget: const App(),
+      debugConfig: debugOptions,
+      releaseConfig: releaseOptions,
+    );
   });
+
+  runApp(const App());
+
+  FlutterNativeSplash.remove();
 }

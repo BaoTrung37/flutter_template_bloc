@@ -43,7 +43,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.10+1
   animated_bottom_navigation_bar: ^1.3.3
-  flutter_easyloading: ^3.0.5
+  flutter_native_splash: ^2.4.4
 
   # Format
   intl: ^0.19.0
@@ -51,12 +51,13 @@ dependencies:
   # State Management
   flutter_bloc: ^9.1.0
   bloc: ^9.0.0
+  hydrated_bloc: ^10.0.0
 
   # Logger
   logger: ^2.4.0
   pretty_dio_logger: ^1.4.0
-  archive: ^4.0.5
   device_info_plus: ^11.3.0
+  catcher_2: ^2.1.3
 
   # Network
   retrofit: ^4.1.0
@@ -84,14 +85,14 @@ dependencies:
   flutter_local_notifications: ^18.0.1
 
   # Firebase
-  firebase_core: ^3.6.0
-  firebase_app_check: ^0.3.1+3
-  firebase_analytics: ^11.3.3
-  firebase_crashlytics: ^4.1.3
-  firebase_auth: ^5.3.1
+  firebase_core: ^3.13.1
+  firebase_app_check: ^0.3.2+6
+  firebase_analytics: ^11.4.6
+  firebase_crashlytics: ^4.3.6
+  firebase_auth: ^5.5.4
 
   # Utilities
-  url_launcher: ^6.3.0
+  google_fonts: ^6.2.1
 
 
 dev_dependencies:
@@ -128,6 +129,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/launcher_icon/
     - assets/env/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

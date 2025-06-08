@@ -8,52 +8,43 @@
             "name": "dev",
             "request": "launch",
             "type": "dart",
-            "args": ["--flavor", "dev"],
-            "program": "lib/main_dev.dart",
-            "flutterToolPath": "${workspaceFolder}/fvm/flutter_sdk/bin/flutter"
+            "args": [
+                "--flavor", "dev",
+                "--dart-define=FLAVOR=dev",
+            ],
+            "program": "lib/main.dart",
         },
         {
-            "name": "dev (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile",
-            "args": ["--flavor", "dev"],
-            "program": "lib/main_dev.dart",
-            "flutterToolPath": "${workspaceFolder}/fvm/flutter_sdk/bin/flutter"
-        },
-        {
-            "name": "dev (release mode)",
+            "name": "dev-release",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",
-            "args": ["--flavor", "dev"],
-            "program": "lib/main_dev.dart",
-            "flutterToolPath": "${workspaceFolder}/fvm/flutter_sdk/bin/flutter"
+            "args": [
+                "--flavor", "dev",
+                "--dart-define=FLAVOR=dev",
+            ],
+            "program": "lib/main.dart",
         },
         {
             "name": "prod",
             "request": "launch",
             "type": "dart",
-            "args": ["--flavor", "prod"],
-            "program": "lib/main_prod.dart",
-            "flutterToolPath": "${workspaceFolder}/fvm/flutter_sdk/bin/flutter"
+            "args": [
+                "--flavor", "prod",
+                "--dart-define=FLAVOR=prod",
+            ],
+            "program": "lib/main.dart",
         },
         {
-            "name": "prod (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile",
-            "args": ["--flavor", "prod"],
-            "program": "lib/main_prod.dart",
-            "flutterToolPath": "${workspaceFolder}/fvm/flutter_sdk/bin/flutter"
-        },
-        {
-            "name": "prod (release mode)",
+            "name": "prod-release",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",
-            "args": ["--flavor", "prod"],
-            "program": "lib/main_prod.dart",
+            "args": [
+                "--flavor", "prod",
+                "--dart-define=FLAVOR=prod",
+            ],
+            "program": "lib/main.dart",
         },
     ]
 }
