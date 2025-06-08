@@ -5,11 +5,11 @@ import 'package:example_flutter_app/core/theme/providers/theme_provider.dart';
 import 'package:example_flutter_app/core/theme/texts.dart';
 import 'package:example_flutter_app/core/theme/universal_theme.dart';
 import 'package:example_flutter_app/core/utilities/constants/app_constants.dart';
+import 'package:example_flutter_app/core/utilities/enums/common/languages.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:example_flutter_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -70,8 +70,10 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeProvider.of(context).dark,
             themeMode: ThemeProvider.of(context).mode,
             supportedLocales: AppLocalizations.supportedLocales,
-            routerConfig: getIt<AppRouter>().config(),
-            builder: EasyLoading.init(),
+            locale: state.language.locate,
+            // routerConfig: getIt<AppRouter>().config(),
+            routerDelegate: getIt<AppRouter>().delegate(),
+            routeInformationParser: getIt<AppRouter>().defaultRouteParser(),
           );
         },
       ),

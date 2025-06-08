@@ -15,14 +15,10 @@ class MainBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final tabs = <TabItem>[
       TabItem(
-        // iconSvg: Assets.icons.icHomeOutline,
-        // iconSvgSelected: Assets.icons.icHome,
         text: 'Home',
       ),
       TabItem(
-        // iconSvg: Assets.icons.icResumeOutline,
-        // iconSvgSelected: Assets.icons.icResume,
-        text: 'More',
+        text: 'Profile',
       ),
     ];
     return Column(
@@ -85,14 +81,6 @@ class _TabBarItem extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // if (isSelected)
-            //   tabItem.iconSvgSelected.svg(
-            //     height: 24.h,
-            //   )
-            // else
-            //   tabItem.iconSvg.svg(
-            //     height: 24.h,
-            //   ),
             8.verticalSpace,
             Text(
               tabItem.text,
@@ -111,12 +99,8 @@ class _TabBarItem extends StatelessWidget {
 
 class TabItem {
   TabItem({
-    // required this.iconSvg,
-    // required this.iconSvgSelected,
     required this.text,
   });
 
-  // final SvgGenImage iconSvg;
-  // final SvgGenImage iconSvgSelected;
   final String text;
 }

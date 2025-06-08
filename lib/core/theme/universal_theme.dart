@@ -53,7 +53,6 @@ class UniversalThemeFactory extends NikeThemeDataFactory {
         ),
         appBarTheme: AppBarTheme(
           scrolledUnderElevation: 0,
-          titleSpacing: -10,
           backgroundColor: colors.white,
           foregroundColor: colors.black,
           centerTitle: false,

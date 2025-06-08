@@ -27,7 +27,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
       child: AutoTabsRouter(
         routes: const [
           HomeRoute(),
-          MoreRoute(),
+          ProfileRoute(),
         ],
         transitionBuilder: (context, child, animation) => FadeTransition(
           opacity: animation,

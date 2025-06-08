@@ -32,6 +32,7 @@ class LanguageBloc extends HydratedBloc<LanguageEvent, LanguageState> {
   ) async {
     emit(state.copyWith(
       tempLanguage: event.language,
+      language: event.language,
     ));
   }
 

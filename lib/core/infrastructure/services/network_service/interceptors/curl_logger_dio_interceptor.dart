@@ -3,9 +3,14 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class CurlLoggerDioInterceptor extends Interceptor {
-  CurlLoggerDioInterceptor({this.printOnSuccess, this.convertFormData = true});
+  CurlLoggerDioInterceptor({
+    this.printOnSuccess = false,
+    this.convertFormData = true,
+  });
   final bool? printOnSuccess;
   final bool convertFormData;
 

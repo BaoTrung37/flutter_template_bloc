@@ -6,19 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class MoreScreen extends StatelessWidget {
-  const MoreScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('More Screen'),
+        title: const Text('Profile Screen'),
       ),
       body: Center(
         child: Column(
           children: [
-            const Text('More Screen'),
             BlocBuilder<LanguageBloc, LanguageState>(
               bloc: getIt<LanguageBloc>(),
               builder: (context, state) {

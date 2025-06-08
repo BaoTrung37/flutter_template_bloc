@@ -2,10 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:example_flutter_app/core/app_config.dart';
 import 'package:example_flutter_app/core/infrastructure/services/network_service/interceptors/auth_interceptor.dart';
 import 'package:example_flutter_app/core/infrastructure/services/network_service/interceptors/common_header_interceptor.dart';
+import 'package:example_flutter_app/core/infrastructure/services/network_service/interceptors/curl_logger_dio_interceptor.dart';
 import 'package:example_flutter_app/injection/di.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-// @module
 abstract class DioHelper {
   // @factoryMethod
   static Dio configApiDio(AppConfig appConfig) => _createDio(
@@ -36,21 +35,8 @@ abstract class DioHelper {
     }
 
     if (loggerEnable) {
-      dio.interceptors.add(_DebugLogger());
+      dio.interceptors.add(getIt<CurlLoggerDioInterceptor>());
     }
     return dio;
   }
-}
-
-class _DebugLogger extends PrettyDioLogger {
-  _DebugLogger()
-      : super(
-          requestHeader: true,
-          requestBody: true,
-          responseBody: true,
-          responseHeader: true,
-          error: true,
-          compact: true,
-          maxWidth: 1000,
-        );
 }

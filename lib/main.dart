@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:catcher_2/catcher_2.dart';
 import 'package:example_flutter_app/core/app_config.dart';
 import 'package:example_flutter_app/presentation/app/app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -14,20 +16,33 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-FutureOr<void> mainApp(Flavor flavor) async {
-  Future<void> startApp() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    HttpOverrides.global = MyHttpOverrides();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
 
-    final appConfig = AppConfig(flavor: flavor);
-    await appConfig.initialize();
+  final appConfig = AppConfig();
+  await appConfig.initialize();
 
-    runApp(const App());
-  }
-
-  await runZonedGuarded(() async {
-    await startApp();
-  }, (Object error, StackTrace stackTrace) {
-    // AppLogger.instance.logD('runZonedGuarded Error: $error');
+  final debugOptions = Catcher2Options(SilentReportMode(), [
+    ToastHandler(
+      customMessage: 'An error occurred. Please try again!',
+      textSize: 14,
+    ),
+    ConsoleHandler(),
+    // CrashlyticsHandler(),
+  ]);
+  final releaseOptions = Catcher2Options(SilentReportMode(), [
+    // CrashlyticsHandler(),
+  ]);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((_) {
+    Catcher2(
+      rootWidget: const App(),
+      debugConfig: debugOptions,
+      releaseConfig: releaseOptions,
+    );
   });
+
+  runApp(const App());
 }

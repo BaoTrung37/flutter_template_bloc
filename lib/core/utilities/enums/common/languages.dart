@@ -3,6 +3,7 @@ import 'dart:ui';
 enum Languages {
   en,
   ko,
+  vi,
 }
 
 extension LanguagesExtension on Languages {
@@ -12,6 +13,8 @@ extension LanguagesExtension on Languages {
         return 'English';
       case Languages.ko:
         return '한국어';
+      case Languages.vi:
+        return 'Tiếng Việt';
     }
   }
 
@@ -21,6 +24,8 @@ extension LanguagesExtension on Languages {
         return const Locale('en');
       case Languages.ko:
         return const Locale('ko');
+      case Languages.vi:
+        return const Locale('vi');
     }
   }
 
@@ -30,6 +35,8 @@ extension LanguagesExtension on Languages {
         return 'en';
       case Languages.ko:
         return 'ko';
+      case Languages.vi:
+        return 'vi';
     }
   }
 }
