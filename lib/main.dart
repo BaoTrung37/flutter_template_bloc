@@ -6,6 +6,7 @@ import 'package:example_flutter_app/core/app_config.dart';
 import 'package:example_flutter_app/presentation/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -17,7 +18,8 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   HttpOverrides.global = MyHttpOverrides();
 
   final appConfig = AppConfig();
@@ -45,4 +47,6 @@ Future<void> main() async {
   });
 
   runApp(const App());
+
+  FlutterNativeSplash.remove();
 }
