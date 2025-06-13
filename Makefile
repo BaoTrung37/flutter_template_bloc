@@ -1,14 +1,16 @@
 first_run:
 	fvm use 3.27.2
-	make rebuild
+	make get-dependencies
+	make build-runner-delete
+	make gen-l10n
 
 clean:
 	fvm flutter clean
 
-get-dependencies:
+get-dep:
 	fvm flutter pub get
 
-upgrade-dependencies:
+upgrade-dep:
 	fvm flutter pub upgrade --major-versions
 
 build-runner:
@@ -30,10 +32,22 @@ gen-flavor:
 	fvm flutter pub run flutter_flavorizr
 
 build-apk-dev:
-	fvm flutter build apk --flavor dev -t lib/main_dev.dart
+	fvm flutter build apk --flavor dev -t lib/main.dart --dart-define=FLAVOR=dev
 
 build-apk-prod:
-	fvm flutter build apk --flavor prod -t lib/main_prod.dart
+	fvm flutter build apk --flavor prod -t lib/main.dart --dart-define=FLAVOR=prod
+
+build-appbundle-dev:
+	fvm flutter build appbundle --flavor dev -t lib/main.dart --dart-define=FLAVOR=dev
+
+build-appbundle-prod:
+	fvm flutter build appbundle --flavor prod -t lib/main.dart --dart-define=FLAVOR=prod
+
+build-ipa-dev:
+	fvm flutter build ipa --flavor dev -t lib/main.dart --dart-define=FLAVOR=dev
+
+build-ipa-prod:
+	fvm flutter build ipa --flavor prod -t lib/main.dart --dart-define=FLAVOR=prod
 
 rebuild:
 	make clean
