@@ -1,6 +1,6 @@
 first_run:
 	fvm use 3.27.2
-	make get-dependencies
+	make get-dep
 	make build-runner-delete
 	make gen-l10n
 
