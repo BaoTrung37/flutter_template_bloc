@@ -1,6 +1,5 @@
 import 'package:example_flutter_app/core/application/language/language_bloc.dart';
 import 'package:example_flutter_app/core/config.dart';
-import 'package:example_flutter_app/core/router/app_router.dart';
 import 'package:example_flutter_app/core/theme/colors.dart';
 import 'package:example_flutter_app/core/theme/providers/theme_provider.dart';
 import 'package:example_flutter_app/core/theme/texts.dart';
