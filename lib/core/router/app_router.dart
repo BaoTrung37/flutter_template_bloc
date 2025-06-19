@@ -20,10 +20,14 @@ class AppRouter extends RootStackRouter {
               page: HomeRoute.page,
             ),
             AutoRoute(
-              path: 'profile',
+              path: 'profile-page',
               page: ProfileRoute.page,
             ),
           ],
+        ),
+        AutoRoute(
+          path: '/setting-page',
+          page: SettingRoute.page,
         ),
       ];
 }
