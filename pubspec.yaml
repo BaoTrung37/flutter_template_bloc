@@ -44,6 +44,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   animated_bottom_navigation_bar: ^1.3.3
   flutter_native_splash: ^2.4.4
+  loading_overlay: ^0.4.2
 
   # Format
   intl: ^0.19.0
@@ -88,6 +89,11 @@ dependencies:
   path_provider: ^2.1.3
   shared_preferences: ^2.2.3
   flutter_local_notifications: ^18.0.1
+  flutter_secure_storage: ^9.2.4
+
+  # Input
+  flutter_form_builder: ^9.7.0
+  form_builder_validators: ^11.1.2
 
   # Firebase
   firebase_core: ^3.13.1
