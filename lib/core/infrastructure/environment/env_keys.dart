@@ -6,7 +6,7 @@ class EnvKeys {
   static Future<void> loadEnv(Flavor flavor) async {
     switch (flavor) {
       case Flavor.dev:
-        await dotenv.load(fileName: Assets.env.aEnv);
+        await dotenv.load(fileName: Assets.env.aEnvDev);
         break;
       case Flavor.prod:
         await dotenv.load(fileName: Assets.env.aEnv);

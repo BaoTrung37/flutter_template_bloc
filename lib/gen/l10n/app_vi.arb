@@ -1,0 +1,8 @@
+{
+    "@@locale": "vi",
+    "appName": "Tên dựng dụng",
+    "@appName": {"description": "The name of application"},
+"@@__KEYS_OF_CORE_SCREEN" : "",
+    "ok": "ok",
+    "@ok": {"description": ""}
+}

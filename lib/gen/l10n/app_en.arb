@@ -1,0 +1,8 @@
+{
+    "@@locale": "en",
+    "appName": "App Name",
+    "@appName": {"description": "The name of application"},
+"@@__KEYS_OF_CORE_SCREEN" : "",
+    "ok": "ok",
+    "@ok": {"description": ""}
+}

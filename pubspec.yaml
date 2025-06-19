@@ -52,6 +52,7 @@ dependencies:
   flutter_bloc: ^9.1.0
   bloc: ^9.0.0
   hydrated_bloc: ^10.0.0
+  bloc_concurrency: ^0.3.0
 
   # Logger
   logger: ^2.4.0
@@ -90,9 +91,14 @@ dependencies:
   firebase_analytics: ^11.4.6
   firebase_crashlytics: ^4.3.6
   firebase_auth: ^5.5.4
+  cloud_firestore: ^5.6.9
+  firebase_storage: ^12.4.7
 
   # Utilities
   google_fonts: ^6.2.1
+
+  # Function
+  dartz: ^0.10.1
 
 
 dev_dependencies:
