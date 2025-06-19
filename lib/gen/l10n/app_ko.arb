@@ -1,7 +1,8 @@
 {
     "@@locale": "ko",
-    "appName": "앱",
-    "@appName": {
-    "description": ""
-    }
+    "appName": "",
+    "@appName": {"description": "The name of application"},
+"@@__KEYS_OF_CORE_SCREEN" : "",
+    "ok": "ok",
+    "@ok": {"description": ""}
 }
