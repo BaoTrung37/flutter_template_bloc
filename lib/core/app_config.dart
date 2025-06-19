@@ -16,12 +16,13 @@ import 'package:path_provider/path_provider.dart';
 
 class AppConfig {
   late Flavor flavor;
+  late EnvKeys envKeys;
   Future<void> initialize() async {
     flavor = flavorEnum;
-    await _initDependencies();
     await Future.wait([
-      _initFirebase(),
+      _initDependencies(),
       _initEnvKeys(),
+      _initFirebase(),
       _initBloc(),
       _initHydratedBloc(),
     ]);
@@ -45,7 +46,9 @@ class AppConfig {
   }
 
   Future<void> _initEnvKeys() async {
-    await EnvKeys.loadEnv(flavor);
+    envKeys = EnvKeys();
+    await envKeys.loadEnv(flavor);
+    print('envKeys: ${envKeys.reqResUrl}');
   }
 
   Future<void> _initBloc() async {
@@ -82,8 +85,6 @@ class AppConfig {
         return prod.DefaultFirebaseOptions.currentPlatform;
     }
   }
-
-  String get baseUrl => EnvKeys.baseUrl;
 }
 
 enum Flavor {

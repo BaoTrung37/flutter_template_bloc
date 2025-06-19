@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:example_flutter_app/core/application/language/language_bloc.dart';
+import 'package:example_flutter_app/core/router/app_router.dart';
 import 'package:example_flutter_app/core/shared/enum/lanugages.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,12 @@ class SettingScreen extends StatelessWidget {
                   },
                 );
               },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.router.push(const SignInRoute());
+              },
+              child: const Text('Sign In'),
             ),
           ],
         ),
