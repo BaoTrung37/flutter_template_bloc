@@ -2,7 +2,7 @@ import 'package:example_flutter_app/core/theme/colors.dart';
 import 'package:example_flutter_app/core/theme/providers/theme_provider.dart';
 import 'package:example_flutter_app/core/theme/texts.dart';
 import 'package:example_flutter_app/core/theme/theme_data/theme_data.dart';
-import 'package:example_flutter_app/l10n/app_localizations.dart';
+import 'package:example_flutter_app/gen/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 extension BuildContextExtension on BuildContext {

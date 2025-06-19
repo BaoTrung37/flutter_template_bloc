@@ -1,13 +1,12 @@
 import 'package:example_flutter_app/core/application/language/language_bloc.dart';
+import 'package:example_flutter_app/core/config.dart';
 import 'package:example_flutter_app/core/router/app_router.dart';
 import 'package:example_flutter_app/core/theme/colors.dart';
 import 'package:example_flutter_app/core/theme/providers/theme_provider.dart';
 import 'package:example_flutter_app/core/theme/texts.dart';
 import 'package:example_flutter_app/core/theme/universal_theme.dart';
-import 'package:example_flutter_app/core/utilities/constants/app_constants.dart';
-import 'package:example_flutter_app/core/utilities/enums/common/languages.dart';
+import 'package:example_flutter_app/gen/l10n/app_localizations.dart';
 import 'package:example_flutter_app/injection/di.dart';
-import 'package:example_flutter_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -29,7 +28,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: AppConstants.designSize,
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => GestureDetector(
@@ -70,7 +69,7 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeProvider.of(context).dark,
             themeMode: ThemeProvider.of(context).mode,
             supportedLocales: AppLocalizations.supportedLocales,
-            locale: state.language.locate,
+            locale: state.language.locale,
             // routerConfig: getIt<AppRouter>().config(),
             routerDelegate: getIt<AppRouter>().delegate(),
             routeInformationParser: getIt<AppRouter>().defaultRouteParser(),

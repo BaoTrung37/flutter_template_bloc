@@ -5,7 +5,7 @@ import 'package:example_flutter_app/core/infrastructure/firebase/firebase_option
     as dev;
 import 'package:example_flutter_app/core/infrastructure/firebase/firebase_options_prod.dart'
     as prod;
-import 'package:example_flutter_app/data/data.dart';
+import 'package:example_flutter_app/core/infrastructure/services/network_service/common/api_constants.dart';
 import 'package:example_flutter_app/injection/di.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';

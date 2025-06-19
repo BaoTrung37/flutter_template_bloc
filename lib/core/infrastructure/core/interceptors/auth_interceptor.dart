@@ -9,7 +9,7 @@ class AuthInterceptor extends Interceptor {
   final SharedManager _sharedManager;
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    final token = _sharedManager.getAccessToken();
+    const token = '';
     options.headers['Authorization'] = 'Bearer $token';
     handler.next(options);
   }

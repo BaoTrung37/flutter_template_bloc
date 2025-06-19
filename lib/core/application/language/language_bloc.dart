@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:example_flutter_app/core/utilities/enums/common/common.dart';
+import 'package:example_flutter_app/core/shared/enum/lanugages.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
