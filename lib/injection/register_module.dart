@@ -1,8 +1,6 @@
-import 'package:dio/dio.dart';
-import 'package:example_flutter_app/core/app_config.dart';
-import 'package:example_flutter_app/core/infrastructure/services/network/client/rest_api_client.dart';
-import 'package:example_flutter_app/core/infrastructure/services/network/common/dio_helper.dart';
-import 'package:example_flutter_app/injection/di.dart';
+import 'package:example_flutter_app/core/config.dart';
+import 'package:example_flutter_app/core/infrastructure/services/network/client/auth_api_client.dart';
+import 'package:example_flutter_app/injection/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,17 +9,15 @@ abstract class RegisterModule {
   @preResolve
   Future<SharedPreferences> get shared => SharedPreferences.getInstance();
 
-  @Named('apiDio')
   @lazySingleton
-  Dio get apiDio {
-    final appConfig = getIt<AppConfig>();
-    return DioHelper.configApiDio(appConfig);
+  RestApiClient get restApiClient {
+    final dio = DioHelper.configApiDio(getIt<AppConfig>());
+    return RestApiClient(dio, baseUrl: getIt<AppConfig>().envKeys.baseUrl);
   }
 
   @lazySingleton
-  RestApiClient get restApiClient {
-    final dio = getIt<Dio>(instanceName: 'apiDio');
-    final appConfig = getIt<AppConfig>();
-    return RestApiClient(dio, baseUrl: appConfig.baseUrl);
+  AuthApiClient get authApiClient {
+    final dio = DioHelper.configApiDio(getIt<AppConfig>());
+    return AuthApiClient(dio, baseUrl: getIt<AppConfig>().envKeys.reqResUrl);
   }
 }
