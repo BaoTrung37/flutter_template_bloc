@@ -5,7 +5,7 @@ import 'package:example_flutter_app/core/infrastructure/firebase/firebase_option
     as dev;
 import 'package:example_flutter_app/core/infrastructure/firebase/firebase_options_prod.dart'
     as prod;
-import 'package:example_flutter_app/injection/di.dart';
+import 'package:example_flutter_app/injection/injection.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,12 +16,13 @@ import 'package:path_provider/path_provider.dart';
 
 class AppConfig {
   late Flavor flavor;
+  late EnvKeys envKeys;
   Future<void> initialize() async {
     flavor = flavorEnum;
-    await _initDependencies();
     await Future.wait([
-      _initFirebase(),
+      _initDependencies(),
       _initEnvKeys(),
+      _initFirebase(),
       _initBloc(),
       _initHydratedBloc(),
     ]);
@@ -45,7 +46,8 @@ class AppConfig {
   }
 
   Future<void> _initEnvKeys() async {
-    await EnvKeys.loadEnv(flavor);
+    envKeys = EnvKeys();
+    await envKeys.loadEnv(flavor);
   }
 
   Future<void> _initBloc() async {
@@ -82,8 +84,6 @@ class AppConfig {
         return prod.DefaultFirebaseOptions.currentPlatform;
     }
   }
-
-  String get baseUrl => EnvKeys.baseUrl;
 }
 
 enum Flavor {

@@ -142,6 +142,8 @@ class UniversalThemeFactory extends NikeThemeDataFactory {
           vertical: 18,
           horizontal: 16,
         ),
+        isDense: true,
+        
         border: OutlineInputBorder(
           borderSide: BorderSide(color: colors.grey3),
           borderRadius: BorderRadius.circular(14),

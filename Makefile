@@ -1,5 +1,6 @@
 first_run:
 	fvm use 3.27.2
+	make create-env-files
 	make get-dep
 	make build-runner-delete
 	make gen-l10n
@@ -48,6 +49,10 @@ build-ipa-dev:
 
 build-ipa-prod:
 	fvm flutter build ipa --flavor prod -t lib/main.dart --dart-define=FLAVOR=prod
+
+create-env-files:
+	cp assets/env/.env.example assets/env/.env
+	cp assets/env/.env.example assets/env/.env.dev
 
 rebuild:
 	make clean
